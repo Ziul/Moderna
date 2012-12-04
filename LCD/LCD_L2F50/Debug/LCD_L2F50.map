@@ -1,0 +1,582 @@
+******************************************************************************
+       MSP430 Evaluation Linker PC v3.3.3                      
+******************************************************************************
+>> Linked Sun Feb 12 00:18:50 2012
+
+OUTPUT FILE NAME:   <LCD_L2F50.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000d4de
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  SFR                   00000000   00000010  00000000  00000010  RWIX
+  PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
+  PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
+  RAM                   00000200   00000200  000000ba  00000146  RWIX
+  INFOD                 00001000   00000040  00000000  00000040  RWIX
+  INFOC                 00001040   00000040  00000000  00000040  RWIX
+  INFOB                 00001080   00000040  00000000  00000040  RWIX
+  INFOA                 000010c0   00000040  00000000  00000040  RWIX
+  FLASH                 0000c000   00003fe0  0000179a  00002846  RWIX
+  INT00                 0000ffe0   00000002  00000000  00000002  RWIX
+  INT01                 0000ffe2   00000002  00000000  00000002  RWIX
+  INT02                 0000ffe4   00000002  00000002  00000000  RWIX
+  INT03                 0000ffe6   00000002  00000000  00000002  RWIX
+  INT04                 0000ffe8   00000002  00000000  00000002  RWIX
+  INT05                 0000ffea   00000002  00000000  00000002  RWIX
+  INT06                 0000ffec   00000002  00000000  00000002  RWIX
+  INT07                 0000ffee   00000002  00000000  00000002  RWIX
+  INT08                 0000fff0   00000002  00000000  00000002  RWIX
+  INT09                 0000fff2   00000002  00000000  00000002  RWIX
+  INT10                 0000fff4   00000002  00000000  00000002  RWIX
+  INT11                 0000fff6   00000002  00000000  00000002  RWIX
+  INT12                 0000fff8   00000002  00000000  00000002  RWIX
+  INT13                 0000fffa   00000002  00000000  00000002  RWIX
+  INT14                 0000fffc   00000002  00000000  00000002  RWIX
+  RESET                 0000fffe   00000002  00000002  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.pinit     0    0000c000    00000000     UNINITIALIZED
+
+.bss       0    00000200    0000006a     UNINITIALIZED
+                  00000200    0000005a     lcd.obj (.bss)
+                  0000025a    00000004     rts430.lib : _lock.obj (.bss)
+                  0000025e    00000004                : boot.obj (.bss)
+                  00000262    00000003     main.obj (.bss)
+                  00000265    00000001     --HOLE--
+                  00000266    00000002     disp.obj (.bss)
+                  00000268    00000002     rts430.lib : errno.obj (.bss)
+
+.stack     0    000003b0    00000050     UNINITIALIZED
+                  000003b0    00000002     rts430.lib : boot.obj (.stack)
+                  000003b2    0000004e     --HOLE--
+
+.text      0    0000c000    00001626     
+                  0000c000    000002a2     main.obj (.text:main)
+                  0000c2a2    000001ce     disp.obj (.text:lcd_put_numero)
+                  0000c470    000001b6     lcd.obj (.text:lcd_init)
+                  0000c626    0000013a     rts430.lib : _log.obj (.text:_log)
+                  0000c760    00000130                : fs_add.obj (.text)
+                  0000c890    0000012e     disp.obj (.text:lcd_linha)
+                  0000c9be    00000124     rts430.lib : exp.obj (.text:exp)
+                  0000cae2    000000f6     disp.obj (.text:lcd_put_char)
+                  0000cbd8    000000f6     rts430.lib : pow.obj (.text:pow)
+                  0000ccce    000000f2                : sqrt.obj (.text:sqrt)
+                  0000cdc0    000000f0     disp.obj (.text:lcd_retangulo)
+                  0000ceb0    000000c2     rts430.lib : fs_mpy.obj (.text)
+                  0000cf72    0000009e                : ldexp.obj (.text:ldexp)
+                  0000d010    0000009a                : fs_div.obj (.text)
+                  0000d0aa    00000096     disp.obj (.text:lcd_circulo)
+                  0000d140    00000080     disp.obj (.text:lcd_set_pixel)
+                  0000d1c0    00000074     disp.obj (.text:lcd_clear)
+                  0000d234    00000068     rts430.lib : fs_toi.obj (.text)
+                  0000d29c    00000050                : frexp.obj (.text:frexp)
+                  0000d2ec    0000004e     lcd.obj (.text:writeSPI)
+                  0000d33a    0000004c     rts430.lib : lsr16.obj (.text)
+                  0000d386    0000004a                : fs_cmp.obj (.text)
+                  0000d3d0    00000046                : autoinit.obj (.text:_auto_init)
+                  0000d416    0000003a     disp.obj (.text:arredondamento)
+                  0000d450    00000036     rts430.lib : fs_itof.obj (.text)
+                  0000d486    0000002c                : asr16.obj (.text)
+                  0000d4b2    0000002c                : lsl16.obj (.text)
+                  0000d4de    00000026                : boot.obj (.text:_c_int00_noexit)
+                  0000d504    00000024     lcd.obj (.text:lcd_wrcmd)
+                  0000d528    00000022     lcd.obj (.text:mswait)
+                  0000d54a    0000001e     main.obj (.text:P1_ISR)
+                  0000d568    00000018     lcd.obj (.text:lcd_cspulse)
+                  0000d580    00000018     lcd.obj (.text:lcd_wrdat16)
+                  0000d598    00000016     lcd.obj (.text:lcd_write)
+                  0000d5ae    00000014     lcd.obj (.text:lcd_wrdata)
+                  0000d5c2    00000014     rts430.lib : mult16.obj (.text)
+                  0000d5d6    00000012                : memcpy.obj (.text:memcpy)
+                  0000d5e8    00000010     lcd.obj (.text:pinWrite)
+                  0000d5f8    00000010     rts430.lib : epilog.obj (.text)
+                  0000d608    0000000a                : abs.obj (.text:abs)
+                  0000d612    0000000a                : fs_neg.obj (.text)
+                  0000d61c    00000004                : pre_init.obj (.text:_system_pre_init)
+                  0000d620    00000004                : exit.obj (.text:abort)
+                  0000d624    00000002                : _lock.obj (.text:_nop)
+
+.const     0    0000d626    000000ea     
+                  0000d626    000000e0     disp.obj (.const:$P$T1$2)
+                  0000d706    0000000a     disp.obj (.const:$P$T0$1)
+
+.cinit     0    0000d710    0000008a     
+                  0000d710    00000069     lcd.obj (.cinit)
+                  0000d779    00000001     --HOLE-- [fill = 0]
+                  0000d77a    00000011     main.obj (.cinit)
+                  0000d78b    00000001     --HOLE-- [fill = 0]
+                  0000d78c    00000006     disp.obj (.cinit)
+                  0000d792    00000006     rts430.lib : errno.obj (.cinit)
+                  0000d798    00000002     --HOLE-- [fill = 0]
+
+.int02     0    0000ffe4    00000002     
+                  0000ffe4    00000002     main.obj (.int02)
+
+.reset     0    0000fffe    00000002     
+                  0000fffe    00000002     rts430.lib : boot.obj (.reset)
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address    name
+--------   ----
+00000200   .bss
+0000c000   .text
+0000004a   ADC10AE0
+000001b0   ADC10CTL0
+000001b2   ADC10CTL1
+00000048   ADC10DTC0
+00000049   ADC10DTC1
+000001b4   ADC10MEM
+000001bc   ADC10SA
+00000057   BCSCTL1
+00000058   BCSCTL2
+00000053   BCSCTL3
+0000d620   C$$EXIT
+00000059   CACTL1
+0000005a   CACTL2
+000010fb   CALBC1_12MHZ
+000010f9   CALBC1_16MHZ
+000010ff   CALBC1_1MHZ
+000010fd   CALBC1_8MHZ
+000010fa   CALDCO_12MHZ
+000010f8   CALDCO_16MHZ
+000010fe   CALDCO_1MHZ
+000010fc   CALDCO_8MHZ
+0000005b   CAPD
+00000056   DCOCTL
+00000128   FCTL1
+0000012a   FCTL2
+0000012c   FCTL3
+00000000   IE1
+00000001   IE2
+00000002   IFG1
+00000003   IFG2
+0000d486   I_ASR
+0000d4ae   I_ASR_1
+0000d49c   I_ASR_10
+0000d49a   I_ASR_11
+0000d498   I_ASR_12
+0000d496   I_ASR_13
+0000d494   I_ASR_14
+0000d492   I_ASR_15
+0000d4ac   I_ASR_2
+0000d4aa   I_ASR_3
+0000d4a8   I_ASR_4
+0000d4a6   I_ASR_5
+0000d4a4   I_ASR_6
+0000d4a2   I_ASR_7
+0000d4a0   I_ASR_8
+0000d49e   I_ASR_9
+0000d4b2   I_LSL
+0000d4da   I_LSL_1
+0000d4c8   I_LSL_10
+0000d4c6   I_LSL_11
+0000d4c4   I_LSL_12
+0000d4c2   I_LSL_13
+0000d4c0   I_LSL_14
+0000d4be   I_LSL_15
+0000d4d8   I_LSL_2
+0000d4d6   I_LSL_3
+0000d4d4   I_LSL_4
+0000d4d2   I_LSL_5
+0000d4d0   I_LSL_6
+0000d4ce   I_LSL_7
+0000d4cc   I_LSL_8
+0000d4ca   I_LSL_9
+0000d33a   I_LSR
+0000d380   I_LSR_1
+0000d35c   I_LSR_10
+0000d358   I_LSR_11
+0000d354   I_LSR_12
+0000d350   I_LSR_13
+0000d34c   I_LSR_14
+0000d348   I_LSR_15
+0000d37c   I_LSR_2
+0000d378   I_LSR_3
+0000d374   I_LSR_4
+0000d370   I_LSR_5
+0000d36c   I_LSR_6
+0000d368   I_LSR_7
+0000d364   I_LSR_8
+0000d360   I_LSR_9
+00000022   P1DIR
+00000025   P1IE
+00000024   P1IES
+00000023   P1IFG
+00000020   P1IN
+00000021   P1OUT
+00000027   P1REN
+00000026   P1SEL
+00000041   P1SEL2
+0000d54a   P1_ISR
+0000002a   P2DIR
+0000002d   P2IE
+0000002c   P2IES
+0000002b   P2IFG
+00000028   P2IN
+00000029   P2OUT
+0000002f   P2REN
+0000002e   P2SEL
+00000042   P2SEL2
+0000001a   P3DIR
+00000018   P3IN
+00000019   P3OUT
+00000010   P3REN
+0000001b   P3SEL
+00000043   P3SEL2
+00000172   TA0CCR0
+00000174   TA0CCR1
+00000176   TA0CCR2
+00000162   TA0CCTL0
+00000164   TA0CCTL1
+00000166   TA0CCTL2
+00000160   TA0CTL
+0000012e   TA0IV
+00000170   TA0R
+00000192   TA1CCR0
+00000194   TA1CCR1
+00000196   TA1CCR2
+00000182   TA1CCTL0
+00000184   TA1CCTL1
+00000186   TA1CCTL2
+00000180   TA1CTL
+0000011e   TA1IV
+00000190   TA1R
+0000005d   UCA0ABCTL
+00000062   UCA0BR0
+00000063   UCA0BR1
+00000060   UCA0CTL0
+00000061   UCA0CTL1
+0000005f   UCA0IRRCTL
+0000005e   UCA0IRTCTL
+00000064   UCA0MCTL
+00000066   UCA0RXBUF
+00000065   UCA0STAT
+00000067   UCA0TXBUF
+0000006a   UCB0BR0
+0000006b   UCB0BR1
+00000068   UCB0CTL0
+00000069   UCB0CTL1
+0000006c   UCB0I2CIE
+00000118   UCB0I2COA
+0000011a   UCB0I2CSA
+0000006e   UCB0RXBUF
+0000006d   UCB0STAT
+0000006f   UCB0TXBUF
+00000120   WDTCTL
+00000400   __STACK_END
+00000050   __STACK_SIZE
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_exit
+ffffffff   __binit__
+00000200   __bss__
+ffffffff   __c_args__
+0000d710   __cinit__
+0000026a   __end__
+0000d626   __etext__
+0000c766   __fs_add
+0000d386   __fs_cmp
+0000d010   __fs_div
+0000d450   __fs_itof
+0000ceb0   __fs_mpy
+0000d612   __fs_neg
+0000c760   __fs_sub
+0000d234   __fs_toi
+0000d5c2   __mpyi
+ffffffff   __pinit__
+0000c000   __text__
+0000d3d0   _auto_init
+0000d4de   _c_int00
+0000d4de   _c_int00_noexit
+0000025e   _cleanup_ptr
+00000260   _dtors_ptr
+0000025a   _lock
+0000c626   _log
+0000d624   _nop
+0000fffe   _reset_vector
+000003b0   _stack
+0000d61c   _system_pre_init
+0000025c   _unlock
+0000d620   abort
+0000d608   abs
+0000d416   arredondamento
+00000266   backcolor
+ffffffff   binit
+00000264   blue
+0000d710   cinit
+0000026a   end
+00000268   errno
+0000d626   etext
+0000c9be   exp
+0000d29c   frexp
+0000d604   func_epilog_1
+0000d602   func_epilog_2
+0000d600   func_epilog_3
+0000d5fe   func_epilog_4
+0000d5fc   func_epilog_5
+0000d5fa   func_epilog_6
+0000d5f8   func_epilog_7
+00000263   green
+0000d0aa   lcd_circulo
+0000d1c0   lcd_clear
+0000d568   lcd_cspulse
+0000c470   lcd_init
+0000c890   lcd_linha
+0000cae2   lcd_put_char
+0000c2a2   lcd_put_numero
+0000cdc0   lcd_retangulo
+0000d140   lcd_set_pixel
+0000d504   lcd_wrcmd
+0000d580   lcd_wrdat16
+0000d5ae   lcd_wrdata
+0000d598   lcd_write
+0000cf72   ldexp
+0000c000   main
+0000d5d6   memcpy
+0000d528   mswait
+0000d5e8   pinWrite
+ffffffff   pinit
+0000cbd8   pow
+00000262   red
+0000ccce   sqrt
+0000d2ec   writeSPI
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address    name
+--------   ----
+00000000   IE1
+00000001   IE2
+00000001   __TI_args_main
+00000001   __TI_auto_init
+00000001   __TI_exit
+00000002   IFG1
+00000003   IFG2
+00000010   P3REN
+00000018   P3IN
+00000019   P3OUT
+0000001a   P3DIR
+0000001b   P3SEL
+00000020   P1IN
+00000021   P1OUT
+00000022   P1DIR
+00000023   P1IFG
+00000024   P1IES
+00000025   P1IE
+00000026   P1SEL
+00000027   P1REN
+00000028   P2IN
+00000029   P2OUT
+0000002a   P2DIR
+0000002b   P2IFG
+0000002c   P2IES
+0000002d   P2IE
+0000002e   P2SEL
+0000002f   P2REN
+00000041   P1SEL2
+00000042   P2SEL2
+00000043   P3SEL2
+00000048   ADC10DTC0
+00000049   ADC10DTC1
+0000004a   ADC10AE0
+00000050   __STACK_SIZE
+00000053   BCSCTL3
+00000056   DCOCTL
+00000057   BCSCTL1
+00000058   BCSCTL2
+00000059   CACTL1
+0000005a   CACTL2
+0000005b   CAPD
+0000005d   UCA0ABCTL
+0000005e   UCA0IRTCTL
+0000005f   UCA0IRRCTL
+00000060   UCA0CTL0
+00000061   UCA0CTL1
+00000062   UCA0BR0
+00000063   UCA0BR1
+00000064   UCA0MCTL
+00000065   UCA0STAT
+00000066   UCA0RXBUF
+00000067   UCA0TXBUF
+00000068   UCB0CTL0
+00000069   UCB0CTL1
+0000006a   UCB0BR0
+0000006b   UCB0BR1
+0000006c   UCB0I2CIE
+0000006d   UCB0STAT
+0000006e   UCB0RXBUF
+0000006f   UCB0TXBUF
+00000118   UCB0I2COA
+0000011a   UCB0I2CSA
+0000011e   TA1IV
+00000120   WDTCTL
+00000128   FCTL1
+0000012a   FCTL2
+0000012c   FCTL3
+0000012e   TA0IV
+00000160   TA0CTL
+00000162   TA0CCTL0
+00000164   TA0CCTL1
+00000166   TA0CCTL2
+00000170   TA0R
+00000172   TA0CCR0
+00000174   TA0CCR1
+00000176   TA0CCR2
+00000180   TA1CTL
+00000182   TA1CCTL0
+00000184   TA1CCTL1
+00000186   TA1CCTL2
+00000190   TA1R
+00000192   TA1CCR0
+00000194   TA1CCR1
+00000196   TA1CCR2
+000001b0   ADC10CTL0
+000001b2   ADC10CTL1
+000001b4   ADC10MEM
+000001bc   ADC10SA
+00000200   .bss
+00000200   __bss__
+0000025a   _lock
+0000025c   _unlock
+0000025e   _cleanup_ptr
+00000260   _dtors_ptr
+00000262   red
+00000263   green
+00000264   blue
+00000266   backcolor
+00000268   errno
+0000026a   __end__
+0000026a   end
+000003b0   _stack
+00000400   __STACK_END
+000010f8   CALDCO_16MHZ
+000010f9   CALBC1_16MHZ
+000010fa   CALDCO_12MHZ
+000010fb   CALBC1_12MHZ
+000010fc   CALDCO_8MHZ
+000010fd   CALBC1_8MHZ
+000010fe   CALDCO_1MHZ
+000010ff   CALBC1_1MHZ
+0000c000   .text
+0000c000   __text__
+0000c000   main
+0000c2a2   lcd_put_numero
+0000c470   lcd_init
+0000c626   _log
+0000c760   __fs_sub
+0000c766   __fs_add
+0000c890   lcd_linha
+0000c9be   exp
+0000cae2   lcd_put_char
+0000cbd8   pow
+0000ccce   sqrt
+0000cdc0   lcd_retangulo
+0000ceb0   __fs_mpy
+0000cf72   ldexp
+0000d010   __fs_div
+0000d0aa   lcd_circulo
+0000d140   lcd_set_pixel
+0000d1c0   lcd_clear
+0000d234   __fs_toi
+0000d29c   frexp
+0000d2ec   writeSPI
+0000d33a   I_LSR
+0000d348   I_LSR_15
+0000d34c   I_LSR_14
+0000d350   I_LSR_13
+0000d354   I_LSR_12
+0000d358   I_LSR_11
+0000d35c   I_LSR_10
+0000d360   I_LSR_9
+0000d364   I_LSR_8
+0000d368   I_LSR_7
+0000d36c   I_LSR_6
+0000d370   I_LSR_5
+0000d374   I_LSR_4
+0000d378   I_LSR_3
+0000d37c   I_LSR_2
+0000d380   I_LSR_1
+0000d386   __fs_cmp
+0000d3d0   _auto_init
+0000d416   arredondamento
+0000d450   __fs_itof
+0000d486   I_ASR
+0000d492   I_ASR_15
+0000d494   I_ASR_14
+0000d496   I_ASR_13
+0000d498   I_ASR_12
+0000d49a   I_ASR_11
+0000d49c   I_ASR_10
+0000d49e   I_ASR_9
+0000d4a0   I_ASR_8
+0000d4a2   I_ASR_7
+0000d4a4   I_ASR_6
+0000d4a6   I_ASR_5
+0000d4a8   I_ASR_4
+0000d4aa   I_ASR_3
+0000d4ac   I_ASR_2
+0000d4ae   I_ASR_1
+0000d4b2   I_LSL
+0000d4be   I_LSL_15
+0000d4c0   I_LSL_14
+0000d4c2   I_LSL_13
+0000d4c4   I_LSL_12
+0000d4c6   I_LSL_11
+0000d4c8   I_LSL_10
+0000d4ca   I_LSL_9
+0000d4cc   I_LSL_8
+0000d4ce   I_LSL_7
+0000d4d0   I_LSL_6
+0000d4d2   I_LSL_5
+0000d4d4   I_LSL_4
+0000d4d6   I_LSL_3
+0000d4d8   I_LSL_2
+0000d4da   I_LSL_1
+0000d4de   _c_int00
+0000d4de   _c_int00_noexit
+0000d504   lcd_wrcmd
+0000d528   mswait
+0000d54a   P1_ISR
+0000d568   lcd_cspulse
+0000d580   lcd_wrdat16
+0000d598   lcd_write
+0000d5ae   lcd_wrdata
+0000d5c2   __mpyi
+0000d5d6   memcpy
+0000d5e8   pinWrite
+0000d5f8   func_epilog_7
+0000d5fa   func_epilog_6
+0000d5fc   func_epilog_5
+0000d5fe   func_epilog_4
+0000d600   func_epilog_3
+0000d602   func_epilog_2
+0000d604   func_epilog_1
+0000d608   abs
+0000d612   __fs_neg
+0000d61c   _system_pre_init
+0000d620   C$$EXIT
+0000d620   abort
+0000d624   _nop
+0000d626   __etext__
+0000d626   etext
+0000d710   __cinit__
+0000d710   cinit
+0000fffe   _reset_vector
+ffffffff   __binit__
+ffffffff   __c_args__
+ffffffff   __pinit__
+ffffffff   binit
+ffffffff   pinit
+
+[222 symbols]

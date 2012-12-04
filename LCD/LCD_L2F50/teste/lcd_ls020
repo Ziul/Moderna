@@ -1,0 +1,285 @@
+/*
+ * lcd_ls020.c
+ *
+ *  Created on: 08/02/2012
+ *      Author: Limpinho
+ */
+
+#include "lcd.h"
+
+void S65_CS_DISABLE()
+{
+	pinWrite(CS,1);
+}
+
+void S65_CS_ENABLE()
+{
+	pinWrite(CS,0);
+}
+
+void S65_RS_DISABLE()
+{
+	pinWrite(RS,1);
+}
+
+void S65_RS_ENABLE()
+{
+	pinWrite(RS,0);
+}
+
+void S65_RST_DISABLE()
+{
+	pinWrite(RESET,1);
+}
+
+void S65_RST_ENABLE()
+{
+	pinWrite(RESET,0);
+}
+
+void S65_CLK_LOW()
+{
+	pinWrite(CLK,0);
+}
+
+void S65_CLK_HIGH()
+{
+	pinWrite(CLK,1);
+}
+
+void S65_DAT_LOW()
+{
+	pinWrite(DATA,0);
+}
+
+void S65_DAT_HIGH()
+{
+	pinWrite(DATA,1);
+}
+
+
+void delay(uint16_t ms)
+ {
+ 	BCSCTL1= CALBC1_16MHZ;		//Set up the processor to run at a calibrated 16MHz rate.
+ 	DCOCTL= CALDCO_16MHZ;
+
+ 	//d*=512;
+ 	uint16_t time = ms;
+
+     while (time--)
+     {
+         __delay_cycles(16000);//30
+     }
+ }
+
+
+void s65_drawStart(void)
+{
+  S65_RS_ENABLE(); //data
+  S65_CS_ENABLE();
+
+
+  return;
+}
+
+
+
+
+void s65_draw(uint16_t color)
+{
+  s65_writeSPI(color>>8);
+  s65_writeSPI(color);
+
+
+  return;
+}
+
+
+
+
+void s65_drawStop(void)
+{
+  S65_CS_DISABLE();
+
+
+  return;
+}
+
+
+
+
+void s65_setArea(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
+{
+  s65_writeCmd(0xEF, 0x90);
+
+  s65_writeCmd(0x08, y0);                //set y0
+  s65_writeCmd(0x09, y1);                //set y1
+  s65_writeCmd(0x0A, (S65_WIDTH-1)-x0);  //set x0
+  s65_writeCmd(0x0B, (S65_WIDTH-1)-x1);  //set x1
+  s65_writeCmd(0x06, y0);                //set y cursor pos
+  s65_writeCmd(0x07, (S65_WIDTH-1)-x0);  //set x cursor pos
+
+
+  return;
+}
+
+
+
+
+void s65_setCursor(uint8_t x, uint8_t y)
+{
+  s65_writeCmd(0xEF, 0x90);
+
+  s65_writeCmd(0x06, y);                //set y cursor pos
+  s65_writeCmd(0x07, (S65_WIDTH-1)-x);  //set x cursor pos
+
+  return;
+}
+
+
+
+void s65_init(void)
+{
+  //reset
+	PORT_DIR |= (RS | DATA | CLK | CS | RESET);
+  S65_CS_DISABLE();
+  S65_RS_DISABLE();
+  S65_RST_ENABLE();
+  delay(50);
+  S65_RST_DISABLE();
+  delay(50);
+
+
+  s65_writeCmd(0xFD, 0xFD);
+  s65_writeCmd(0xFD, 0xFD);
+
+
+  delay(50);
+
+
+  //init 1
+  s65_writeCmd(0xEF, 0x00);
+  s65_writeCmd(0xEE, 0x04);
+  s65_writeCmd(0x1B, 0x04);
+  s65_writeCmd(0xFE, 0xFE);
+  s65_writeCmd(0xFE, 0xFE);
+  s65_writeCmd(0xEF, 0x90);
+  s65_writeCmd(0x4A, 0x04);
+  s65_writeCmd(0x7F, 0x3F);
+  s65_writeCmd(0xEE, 0x04);
+  s65_writeCmd(0x43, 0x06);
+
+
+  delay(7); //important 7ms
+
+
+  //init 2
+  s65_writeCmd(0xEF, 0x90);
+  s65_writeCmd(0x09, 0x83);
+  s65_writeCmd(0x08, 0x00);
+  s65_writeCmd(0x0B, 0xAF);
+  s65_writeCmd(0x0A, 0x00);
+  s65_writeCmd(0x05, 0x00);
+  s65_writeCmd(0x06, 0x00);
+  s65_writeCmd(0x07, 0x00);
+  s65_writeCmd(0xEF, 0x00);
+  s65_writeCmd(0xEE, 0x0C);
+  s65_writeCmd(0xEF, 0x90);
+  s65_writeCmd(0x00, 0x80);
+  s65_writeCmd(0xEF, 0xB0);
+  s65_writeCmd(0x49, 0x02);
+  s65_writeCmd(0xEF, 0x00);
+  s65_writeCmd(0x7F, 0x01);
+  s65_writeCmd(0xE1, 0x81);
+  s65_writeCmd(0xE2, 0x02);
+  s65_writeCmd(0xE2, 0x76);
+  s65_writeCmd(0xE1, 0x83);
+
+
+  delay(50);
+
+
+  //display on
+  s65_writeCmd(0x80, 0x01);
+  s65_writeCmd(0xEF, 0x90);
+  s65_writeCmd(0x00, 0x00);
+
+  //display options
+  s65_writeCmd(0xEF, 0x90);
+
+  s65_writeCmd(0x01, 0x40); //x1->x0, y0->y1
+  s65_writeCmd(0x05, 0x04); //0x04=rotate, 0x00=normal
+
+  s65_setArea(0, 0, (S65_WIDTH-1), (S65_HEIGHT-1));
+
+  return;
+}
+
+
+
+
+void s65_writeData(uint16_t data)
+{
+  S65_RS_ENABLE(); //data
+  S65_CS_ENABLE();
+  s65_writeSPI(data>>8);
+  s65_writeSPI(data);
+  S65_CS_DISABLE();
+
+
+  return;
+}
+
+
+
+
+void s65_writeCmd(uint8_t reg, uint8_t param)
+{
+  S65_RS_DISABLE(); //cmd
+  S65_CS_ENABLE();
+  s65_writeSPI(reg);
+  s65_writeSPI(param);
+  S65_CS_DISABLE();
+
+
+  return;
+}
+
+
+
+void s65_writeSPI(uint8_t data)
+{
+  uint8_t mask;
+
+  for(mask=0x80; mask!=0; mask>>=1)
+  {
+    S65_CLK_LOW();
+    if(mask & data)
+    {
+      S65_DAT_HIGH();
+    }
+    else
+    {
+      S65_DAT_LOW();
+    }
+    S65_CLK_HIGH();
+  }
+  S65_CLK_LOW();
+
+  return;
+}
+
+void pinWrite(uint8_t bit, uint8_t val)
+  {
+    if (val){
+      PORT_OUT |= bit;
+    } else {
+      PORT_OUT &= ~bit;
+    }
+  }
+
+
+
+
+
+

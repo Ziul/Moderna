@@ -1,0 +1,7 @@
+
+!CONFIGURATION: {0} [Wed Feb 08 15:36:23 BRST 2012]
+
+	!TOOL: {0}
+
+		!WARNING: Unresolved option: com.ti.ccstudio.buildDefinitions.MSP430_3.3.compilerID.ABI
+
