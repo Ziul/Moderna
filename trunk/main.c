@@ -3,6 +3,8 @@
 #include <legacymsp430.h>
 #include <uart.h>
 #include <ploc.h>
+#include <adc.h>
+
 
 #define DEBUG
 

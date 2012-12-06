@@ -1,15 +1,16 @@
-#include "ADC.h"
-#include "leagacymsp430.h"
-#include "disp.h"
+#include <adc.h>
+#include <legacymsp430.h>
+#include <disp.h>
 
 
 void init_adc(){
 
 	WDTCTL = WDTPW + WDTHOLD;                	// Stop WDT
+	
 	ADC10CTL1 = CONSEQ_2 + INCH_1;          	// Repeat single channel, A1
 	ADC10CTL0 = ADC10SHT_2 + MSC + ADC10ON + ADC10IE; // ADC10ON, interrupt enable
 	ADC10DTC1 = 0;								// no reads yet
-	ADC10AE0 |= 0x02; 
+	ADC10AE0 |= 0x02; 							// pin P1.1
 
 }
 

@@ -6,6 +6,7 @@ INCLUDES = 	-I../LCD/lcd_lucas \
 
 LCD = l2f50
 MCU = msp430g2553
+#MCU = msp430g2452
 
 CC = msp430-gcc
 OD = msp430-objdump

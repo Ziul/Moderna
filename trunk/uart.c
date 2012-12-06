@@ -22,7 +22,12 @@
  * It was tested only under MSP430G2553
  */
 
+#include <myerrno.h>
+
+
+#ifdef __MSP430_HAS_USCI__ 
 #include <uart.h>
+
 
 /**
  * Start up the UART
@@ -38,8 +43,8 @@
 int startup (long int baud)
 {
   WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
-//  BCSCTL1 = CALBC1_16MHZ;                    // Set DCO
-//  DCOCTL = CALDCO_16MHZ;
+  BCSCTL1 = CALBC1_16MHZ;                    // Set DCO
+  DCOCTL = CALDCO_16MHZ;
  
   
   
@@ -54,6 +59,12 @@ int startup (long int baud)
 //	IE2 &= ~UCA0RXIE;                       // Disable USCI_A0 RX interrupt
 	
 	return SUCCESS;
+}
+
+void Initialize(void)
+{
+
+
 }
 
 /**
@@ -185,3 +196,16 @@ interrupt(USCIAB0TX_VECTOR) USCI0TX_ISR(void)
 	P1OUT ^= BIT0;
 	__bic_SR_register_on_exit(LPM0_bits + GIE);
 }
+
+#endif
+
+#ifndef __MSP430_HAS_USCI__ 
+int putchar(volatile int c)
+{return ENXIO;}
+
+int getchar()
+{return ENXIO;}
+
+int startup (long int baud)
+{return ENODEV;}
+#endif
