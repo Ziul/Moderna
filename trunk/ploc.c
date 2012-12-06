@@ -16,13 +16,13 @@ int ploc(unsigned int value)
 	x0=value/10; 					//to not overflow the display space
 	
 #ifdef __GRAFICO_BARRAS__
-		lcd_retangulo(BACK,x,0,0,DISP_W);		// clean llast value here
+		lcd_retangulo(BACK,x,0,0,DISP_W,0);		// clean llast value here
 //		lcd_retangulo(COR,x++,0,0,(x0+x1+x2+x3)/4);	// put new value and inc
-		lcd_retangulo(COR,x++,0,0,x0);	// put the value (without filter)
+		lcd_retangulo(COR,x++,0,0,x0,0);	// put the value (without filter)
 #else
-		lcd_retangulo(BACK,x,0,0,DISP_W);		// clean llast value here
+		lcd_retangulo(BACK,x,0,0,DISP_W,0);		// clean llast value here
 //		lcd_set_pixel(COR,x++,(x0+x1+x2+x3)/4);	// with filter
-		lcd_set_pixel(COR,x++,x0);				// without filter
+		lcd_set_pixel(COR,x++,x0,0);				// without filter
 #endif
 
 	antiga = (x0+x1+x2+x3)/4;

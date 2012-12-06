@@ -10,14 +10,14 @@ MCU = msp430g2553
 
 CC = msp430-gcc
 OD = msp430-objdump
-FLAGS= -mmcu=$(MCU) -lc -lfp -lm -O3 -l$(LCD)
+FLAGS= -mmcu=$(MCU) -lc -lfp -lm -O3 -Os -l$(LCD)
 
 TARGET=prog
 ELF = $(TARGET).elf
 
 all: libs
-	$(CC) -c *.c $(INCLUDES) -mmcu=msp430g2553
-	$(CC) *.o $(FLAGS) $(INCLUDES) -o $(ELF) -Wl,-Map=./_$(TARGET).map
+	$(CC) -c *.c $(INCLUDES) $(FLAGS)
+	$(CC) $(INCLUDES) *.o -o $(ELF) -Wl,-Map=./_$(TARGET).map $(FLAGS) 
 	$(OD) -S -g ./$(ELF) > ./_$(TARGET).list
 
 libs:

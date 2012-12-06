@@ -113,7 +113,7 @@ void lcd_circulo(uint16_t color,uint8_t xc,uint8_t yc,uint8_t raio,uint8_t rot)	
 	int index_x = xc,index_y = yc;
 
 	//lcd_set_pixel(color,xc,yc,rot);
-
+/*
 		for(index_x = - raio; index_x <= raio ; index_x++)
 		{
 			index_y = arredondamento(sqrt((raio*raio) - (index_x*index_x)));
@@ -122,6 +122,8 @@ void lcd_circulo(uint16_t color,uint8_t xc,uint8_t yc,uint8_t raio,uint8_t rot)	
 			lcd_set_pixel(color,xc + index_y,yc + index_x,rot);
 			lcd_set_pixel(color,xc - index_y,yc + index_x,rot);
 		}
+		
+*/
 }
 
 int arredondamento(double num)										//Funcao usada no circulo para deixar ele mais suave
@@ -207,7 +209,7 @@ void lcd_put_numero(uint16_t color,uint8_t x, uint8_t y, int numb, uint8_t rot) 
 	uint8_t flag_num = 0;
 
 			num = abs(numb);
-
+/*
 			for(index_display_number = 4 ; index_display_number > 0 ; index_display_number--)
 			{
 					if(num >= pow(10,index_display_number) || flag_num)
@@ -231,7 +233,7 @@ void lcd_put_numero(uint16_t color,uint8_t x, uint8_t y, int numb, uint8_t rot) 
 					lcd_put_char(color,x+(CHAR_W*(index_display_number + posic2)),y,display_number_vector[posic - index_display_number]+48,rot);
 			for(index_display_number = 5 ; index_display_number > (posic + posic2) ; index_display_number--)
 				lcd_put_char(color,x+(CHAR_W*(index_display_number)),y,' ',rot);
-
+*/
 	
 }
 
