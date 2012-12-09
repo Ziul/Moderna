@@ -67,7 +67,8 @@ int startup (long int baud)
  *  uses SMCLK as bitclock source and fractional divisor with over sampling mode.
  *
  * @params:
- *   uint32_t bitclk_divisor - should be (SMCLK_FREQ + (BPS >> 1)) / BPS
+ *   uint32_t bitclk_divisor - should be (SMCLK_FREQ + (BPS >> 1)) / BPS @f[ N=\frac{(SMCLK_FREQ + (BPS >> 1))}{Baud Rate} @f]
+ *
  *
  * Thanks to Kevin for original code from 43oh.com:
  * @see http://www.43oh.com/forum/viewtopic.php?f=10&t=2493
@@ -221,7 +222,7 @@ char *gets(char *s,int size)
  */
 interrupt(USCIAB0TX_VECTOR) USCI0TX_ISR(void)
 {
-	P1OUT ^= BIT0;
+//	P1OUT ^= BIT0;
 	__bic_SR_register_on_exit(LPM0_bits + GIE);
 }
 

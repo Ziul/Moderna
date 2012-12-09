@@ -7,9 +7,8 @@
 #include <msp430g2553.h>
 
 
-
 #define DEBUG
-
+#define		B1			BIT3	//BOTAO
 
 const unsigned long SMCLK_FREQ = 16000000;
 const unsigned long BAUD_RATE = 9600;
@@ -17,31 +16,67 @@ const unsigned long BAUD_RATE = 9600;
 int
 main (int argc, char *argv[])
 {
+	unsigned int i=0;
+	
 	WDTCTL = WDTPW + WDTHOLD;               	// Stop WDT
-//	BCSCTL1 = CALBC1_16MHZ;                    // Set DCO
-	DCOCTL = CALDCO_16MHZ;
 
-	lcd_init();
+    if (CALBC1_16MHZ != 0xFF) {
+        /* Adjust this accordingly to your VCC rise time */
+        __delay_cycles(100000);
+
+        /* Follow recommended flow. First, clear all DCOx and MODx bits. Then
+         * apply new RSELx values. Finally, apply new DCOx and MODx bit values.
+         */
+        DCOCTL = 0x00;
+        BCSCTL1 = CALBC1_16MHZ;     /* Set DCO to 16MHz */
+        DCOCTL = CALDCO_16MHZ;
+    }
+
+	P1DIR = 0;
+	P1DIR |= BIT6+BIT0;
+	P1OUT &= (~BIT6)+(~BIT0);
+	
+	// Espera pelo precionar do botão
+	while(i<25)
+	{
+		for(i=0;i<50;i++)
+			__delay_cycles(100000);
+		P1OUT ^= BIT0;	
+		if((P1IN & B1))			//se botão precionado
+		{
+			P1OUT |= BIT0;
+			break;
+		}
+	}
+	
 #ifdef DEBUG
 //	startup(9600);
 	serial_initialize((SMCLK_FREQ + (BAUD_RATE >> 1)) / BAUD_RATE);
 	printf("Debug preparado:\n");
+	
+	P1OUT ^= BIT0;								// ready
+	for(i=0;i<10;i++)
+			__delay_cycles(100000);
+	P1OUT ^= BIT0;								// ready
 #endif
-//	lcd_clear(0xffff);							// fill with white
-//	P1OUT |= BIT6;								// ready
-//	P1DIR |= BIT6;
-//	init_adc();
+
+	lcd_init();
+	lcd_clear(0xffff);							// fill with white
+	init_adc();
 
 	while(1)
 	{
-		//ploc(read_adc());
+		ploc(read_adc());
 #ifdef DEBUG
-		printf("\r%d",read_adc());
+		printf("\r Leitura no canal 4[P1.4]: %d  ",read_adc());
+//		printf("Funcionando\n");
+		P1OUT ^= BIT6;
+		for(i=0;i<10;i++)
+			__delay_cycles(100000);
 #endif
 	}
 	return 0;
 	
-	return 0;
 }
 
 // ADC10 interrupt service routine
