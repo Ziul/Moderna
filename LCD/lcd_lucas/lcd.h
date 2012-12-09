@@ -11,13 +11,13 @@
 #include <inttypes.h>
 #include <msp430g2553.h>
 
-#define PORT_DIR P1DIR
-#define PORT_OUT P1OUT
+#define PORT_DIR P2DIR
+#define PORT_OUT P2OUT
 
-#define CS	   BIT5
-#define RESET  BIT7
-#define RS	   BIT0
-#define DATA   BIT2
+#define CS	   BIT0
+#define RESET  BIT1
+#define RS	   BIT2
+#define DATA   BIT3
 #define CLK    BIT4
 
 # define S65_WIDTH            (176)
