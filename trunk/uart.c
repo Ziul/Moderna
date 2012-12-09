@@ -24,8 +24,11 @@
 
 #include <myerrno.h>
 
+#ifndef __UART_MSP__
+#define __UART_MSP__  
 
-#ifdef __MSP430_HAS_USCI__ 
+
+//#ifdef __MSP430_HAS_USCI__ 
 #include <uart.h>
 
 
@@ -42,12 +45,10 @@
  */
 int startup (long int baud)
 {
-  WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+//  WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
   BCSCTL1 = CALBC1_16MHZ;                    // Set DCO
   DCOCTL = CALDCO_16MHZ;
  
-  
-  
   P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
   P1SEL2 = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
   UCA0CTL1 |= UCSSEL_2;                     // SMCLK
@@ -59,6 +60,33 @@ int startup (long int baud)
 //	IE2 &= ~UCA0RXIE;                       // Disable USCI_A0 RX interrupt
 	
 	return SUCCESS;
+}
+
+/**
+ * serial_initialize(bitclk_divisor) - configure USCI UCA0 as async serial port
+ *  uses SMCLK as bitclock source and fractional divisor with over sampling mode.
+ *
+ * @params:
+ *   uint32_t bitclk_divisor - should be (SMCLK_FREQ + (BPS >> 1)) / BPS
+ *
+ * Thanks to Kevin for original code from 43oh.com:
+ * @see http://www.43oh.com/forum/viewtopic.php?f=10&t=2493
+ *
+ * P1.1 - RX
+ * P1.2 - TX
+ *
+ */
+void serial_initialize(const uint32_t bitclk_divisor)
+{
+    UCA0CTL1 = UCSWRST; // Hold USCI in reset to allow configuration
+    UCA0CTL0 = 0; // No parity, LSB first, 8 bits, one stop bit, UART (async)
+    UCA0BR1 = (bitclk_divisor >> 12) & 0xFF; // High byte of whole divisor
+    UCA0BR0 = (bitclk_divisor >> 4) & 0xFF; // Low byte of whole divisor
+    UCA0MCTL = ((bitclk_divisor << 4) & 0xF0) | UCOS16; // Fractional divisor, over sampling mode
+    UCA0CTL1 = UCSSEL_2; // Use SMCLK for bit rate generator, release reset
+
+    P1SEL = BIT1 | BIT2; // P1.1=RXD, P1.2=TXD
+    P1SEL2 = BIT1 | BIT2; // P1.1=RXD, P1.2=TXD
 }
 
 void Initialize(void)
@@ -197,9 +225,9 @@ interrupt(USCIAB0TX_VECTOR) USCI0TX_ISR(void)
 	__bic_SR_register_on_exit(LPM0_bits + GIE);
 }
 
-#endif
+//#endif
 
-#ifndef __MSP430_HAS_USCI__ 
+/*#ifndef __MSP430_HAS_USCI__ 
 int putchar(volatile int c)
 {return ENXIO;}
 
@@ -208,4 +236,7 @@ int getchar()
 
 int startup (long int baud)
 {return ENODEV;}
+#endif
+*/
+
 #endif

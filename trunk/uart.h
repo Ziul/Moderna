@@ -32,6 +32,7 @@ extern "C" {
 #include <myerrno.h>   /* If without the errors defined in errno */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 
 #ifdef __MSP430_HAS_USCI__
@@ -52,6 +53,22 @@ extern "C" {
 extern
 int startup (long int baud);
 
+/**
+ * serial_initialize(bitclk_divisor) - configure USCI UCA0 as async serial port
+ *  uses SMCLK as bitclock source and fractional divisor with over sampling mode.
+ *
+ * @params:
+ *   uint32_t bitclk_divisor - should be (SMCLK_FREQ + (BPS >> 1)) / BPS
+ *
+ * Thanks to Kevin for original code from 43oh.com:
+ * @see http://www.43oh.com/forum/viewtopic.php?f=10&t=2493
+ *
+ * P1.1 - RX
+ * P1.2 - TX
+ *
+ */
+ extern
+void serial_initialize(const uint32_t bitclk_divisor);
 
 /**
  * Function used to send a char to the standard output.
