@@ -17,6 +17,7 @@ int
 main (int argc, char *argv[])
 {
 	unsigned int i=0;
+	unsigned int max=0,read;
 	
 	WDTCTL = WDTPW + WDTHOLD;               	// Stop WDT
 
@@ -68,9 +69,14 @@ main (int argc, char *argv[])
 	{
 		ploc(read_adc());
 #ifdef DEBUG
-		printf("\r Leitura no canal 4[P1.4]: %d  ",read_adc());
-//		printf("Funcionando\n");
-		P1OUT ^= BIT6;
+		read=read_adc();
+		if(read>max)
+		{
+			max=read;
+			printf("\r Maior ate o momento: %d               \n",max);
+		}
+		printf("\r Leitura no canal 4[P1.4]: %d  ",read);
+		P1OUT ^= BIT0;
 		for(i=0;i<10;i++)
 			__delay_cycles(100000);
 #endif
