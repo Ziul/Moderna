@@ -1,0 +1,101 @@
+\section{Códigos Fontes}\label{src}
+
+%------------------------------------------------------------------------------%		
+% Anexar source main.c com link
+%\hypertarget{main}{
+%\lstinputlisting[language=C]{../main.c} }
+%anexar source main.c sem link
+%\lstinputlisting[language=C]{../main.c}
+%------------------------------------------------------------------------------%		
+%\cite{ti_exemplos}
+%\tableofcontents %Índice de conteúdos
+%\listoftables %Lista de tabelas
+%\listoffigures %Lista de figuras
+%------------------------------------------------------------------------------%		
+\begin{multicols}{2}    % 2 columns
+%caption={[ short ] long }
+
+\hypertarget{main}{
+\lstinputlisting[language=C,caption={[main.c]Código principal},label=main]{../trunk/main.c} }
+
+\end{multicols}
+
+\onecolumn
+\section{Anexos}\label{anexo}
+
+%Inclusão de Figuras
+%--------------------Figura logo da UnB----------------------------------------%
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics [scale=1,angle=0,keepaspectratio=true]{./fts/unb}
+%	\caption{Logo da UnB}
+%	\label{unb}
+%\end{figure}
+%--------------------Figura logo da UnB----------------------------------------%
+%\begin{SCfigure}[1][h] %%Cuidado..ela não se mantem no lugar
+%  \centering
+%  \includegraphics[width=4cm]{./fts/unb}
+%  \caption{Logo da UnB.}
+%  \label{unb1}
+%\end{SCfigure}
+
+
+%\begin{multicols}{4}
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+\tikzstyle{phanton} = []   
+\tikzstyle{line} = [->,bend left] %[draw, -latex']
+\tikzstyle{arrow} = [loop above]
+
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm]
+	\tiny\ttfamily
+	%-- Estados
+	\node [cloud] (E0) at(0,2) {E0};
+	\node [cloud] (E1) at(2,1) {E1};
+	\node [cloud] (E2) at(2,-1) {E2};
+	\node [cloud] (E3) at(0,-2) {E3};
+	\node [cloud] (E4) at(-2,-1) {E4};
+	\node [cloud] (E5) at(-2,1) {E5};
+	%-- setas
+	\path (E0) edge [line] (E1);
+	\path (E1) edge [line] (E2);
+	\path (E2) edge [line] (E3);
+	\path (E3) edge [line] (E4);
+	\path (E4) edge [line] (E5);
+	\path (E5) edge [line] (E0);
+	%-- Desvios
+	\path (E0) edge [draw,loop above] node{controle1=1} (E0);
+	\path (E3) edge [draw,loop below] node{controle2=1} (E3);
+	\path (E2) edge [bend right,->]  node[anchor=east]{controle1=1\&\&controle2=0} (E0);
+	\path (E5) edge [bend right,->]  node[anchor=west]{controle1=0\&\&controle2=1} (E3);
+\end{tikzpicture}
+\\\hypertarget{diagrama}{Diagrama de Estados}
+\end{center}
+
+\begin{circuitikz}[american, scale = 2] \draw
+(0,0) node[op amp] (opamp) {}
+(opamp.+) node[left ] {$v_+$}
+(opamp.-) node[left] {$v_-$}
+(opamp.out) node[right] {$v_o$}
+(opamp.down) node[ground] {}
+(opamp.up) ++ (0,.5) node[above] { {12}{V}} -- (opamp.up)
+;\end{circuitikz}
+
+
+
+\begin{figure}[H]
+\begin{center}\begin{circuitikz} \draw
+	(0,0) to [R=$R_1$,*-] (2,0) --
+	(2,0) to [R=$R_1$, i=$i _1$, v=$v_1$] (4,0) --
+	(4,0) to [C=$R_1$, i=$i _1$, v=$v_1$] (4,2) --
+	(4,2) to [R, -*] (1,2)
+	(0,4) to [ sI=$a_1$] (2,4)
+	(3,4) to [ I=$a_1$] (5,4)
+; \end{circuitikz} \end{center}
+\caption{circuito perdido}
+\label{ce1}
+\end{figure}
+
+%\end{multicols}
+

@@ -1,0 +1,344 @@
+\documentclass[journal,compsoc]{IEEEtran}\newcommand{\journal}{true}
+%\documentclass[conference]{IEEEtran}\newcommand{\journal}{false}
+\ifCLASSOPTIONcompsoc
+  % IEEE Computer Society needs nocompress option
+  % requires cite.sty v4.0 or later (November 2003)
+  \usepackage[nocompress]{cite}
+\else
+  % normal IEEE
+   \usepackage{cite}
+\fi
+%\providecommand{\tabularnewline}{\\}
+
+\usepackage{indentfirst}
+
+%%--------------------Colocados por minha vontade própria-----------------------
+\usepackage{marvosym}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,brazil]{babel}	
+\usepackage[T1]{fontenc}
+\usepackage{wasysym}				% setas
+\usepackage{picinpar}				% figuras onde eu quero, problemas com referencias
+\usepackage{sidecap}				% legenda ao lado da figura
+\usepackage[small,bf]{caption}
+
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{siunitx}
+\usepackage{lipsum}
+\usepackage{csquotes}
+\usepackage{alltt}
+
+\usepackage{ifsym}
+\usepackage{pifont}
+\usepackage{manfnt}
+\usepackage{stmaryrd}
+\usepackage{ulsy}
+
+%\usepackage{fancyhdr}
+%\lhead{O que quero no cabeçalho parte esquerda}
+%\chead{O que quero no cabeçalho parte central}
+%\rhead{O que quero no cabeçalho parte direita}
+%\lfoot{O que quero no rodapé parte esquerda}
+%\cfoot{O que quero no rodapé parte central}
+%\rfoot{O que quero no rodapé parte direita}
+
+\input nomes
+
+
+
+
+%%------------------------------------------------------------------------------
+%%	Resolveu o problema de a linguagem não estar declarada
+\makeatletter
+\def\markboth#1#2{\def\leftmark{\@IEEEcompsoconly{\sffamily}\MakeUppercase{\protect#1}}%
+\def\rightmark{\@IEEEcompsoconly{\sffamily}\MakeUppercase{\protect#2}}}
+\makeatother
+%%------------------------------------------------------------------------------
+%%----------------Para inclusão de algoritmos em C/C++/Assembly---------------------------
+\usepackage{listings}
+%\lstnewenvironment{C}
+\lstset{%
+language=C,							%linguagem
+numbers=left,						%posição dos números
+stepnumber=1,						%frequencia de aparição dos números
+numbersep=3pt,
+basewidth={0.6em,0.45em},
+%fontadjust=true,
+mathescape=true,
+tabsize=4,
+commentstyle=\color{blue},
+literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {õ}{{\~o}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ç}{{\c c}}1,
+breaklines=true,
+showstringspaces=false,
+stringstyle=\color{cyan},
+basicstyle=\tiny\ttfamily}
+% Inclua o source com: \lstinputlisting[language=C]{src/src.c}
+
+\lstdefinelanguage{MSP430}
+{ %% Se estiver faltando alguma palavra reservada, insira ela aqui
+morekeywords={RRC,SWPB,RRA,SXT,PUSH,CALL,RETI,JNE,JNZ,JEQ,
+Z,JNC,JLO,JC,JHS,JN,JGE,JL,JMP,NOP,POP,BR,
+RET,CLRC,SETC,CLRZ,SETZ,CLRN,SETN,DINT,EINT,
+RLA,RLC,ADD,ADDC,INV,XOR,CLR,MOV,TST,CMP,DEC,
+SUB,SUBC,DECD,INC,INCD,SBC,MOV,DADD,BIT,
+BIC,BIS,XOR,AND,MOV.B,MOV.W},
+sensitive=false,
+morecomment=[l]{//},
+morecomment=[l]{;},
+morecomment=[s]{/*}{*/},
+}
+% Inclua o source com: \lstinputlisting[language=MSP430]{src/src.asm}
+
+%
+%%------------------------------------------------------------------------------
+%%---------------------Includes importantes para suporte------------------------
+\input link							% Para verificar links de citações e outras configurações
+%%------------------------------------------------------------------------------
+%%------------------------------------------------------------------------------
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+
+\ifCLASSINFOpdf
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+% \usepackage{tikzgraphicx}
+%  \usepackage[pdftex]{graphicx}  
+%  \pdfcompresslevel=1
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+\pdfcompresslevel=9
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\ifCLASSOPTIONcompsoc
+\usepackage[tight,normalsize,sf,SF]{subfigure}
+%\else
+%\usepackage[tight,footnotesize]{subfigure}
+%\fi
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. Computer Society papers
+% use a larger font and \sffamily font for their captions, hence the
+% additional options needed under compsoc mode. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+\usepackage{float}
+\usepackage{fixltx2e}
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+\usepackage{url}
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% 
+% \url{my_url_here}.
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+	\title{%\includegraphics[width=18cm]{./fts/cap.png}\\
+	\hell\\\ver}
+	\author{
+%--------------------------------Nomes------------------------------------------
+%		\hyperref[luiz]{Luiz Fernando Gomes de Oliveira},~\IEEEmembership{10/46969} 
+%		\\\hyperref[panda]{Helbert de Oliveira Coelho Junior},~\IEEEmembership{10/45253}
+\ifthenelse{\equal{\journal}{true}}{
+\names\\
+}{
+%\thanks{Revisado em \today.}
+\IEEEauthorblockN{\luiz}
+\IEEEauthorblockA{Matricula: \luizmatricula\\E-mail: \eluiz}
+\and
+\IEEEauthorblockN{\canela}
+\IEEEauthorblockA{Matricula: \canelamatricula\\E-mail: \ecanela}
+\and
+\IEEEauthorblockN{\leonardo}
+\IEEEauthorblockA{Matricula: \leomatricula\\E-mail: \eleo}
+}
+\thanks{Revisado em \today.}
+	}
+
+%--------------------------O titulo é inserido aqui!----------------------------
+%	\selectlanguage{english}  %seleciona o idioma em inglês [para mater os termos abstract e o thanks em inglês]
+	\markboth{Universidade de Bras\'ilia - Campus Gama - FGA, \entrega}%
+%{	\begin{figure*}
+%    	\includegraphics[width=\textwidth]{./fts/unb.jpg}
+%	\end{figure*}
+%}
+	{Shell \MakeLowercase{\textit{et al.}}: \ver}
+%-------------------------------------------------------------------------------
+
+	\IEEEcompsoctitleabstractindextext{%
+	\begin{abstract}
+		\input{abstract}
+	\end{abstract}
+	%%-------------------------------------
+	\begin{IEEEkeywords} %palavras chaves
+		\keyw %,\LaTeX.
+	\end{IEEEkeywords}}
+	% make the title area
+\onecolumn		%Conferir se pode ser feito em duas colunas
+
+	\maketitle
+	\thispagestyle{empty}
+
+	\IEEEdisplaynotcompsoctitleabstractindextext
+	\IEEEpeerreviewmaketitle
+
+
+\newpage
+\pagestyle{headings}
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+	\selectlanguage{brazil}		%voltando para o português.
+	
+	\tableofcontents			% Sumario
+	\listoffigures
+	\listoftables
+	\lstlistoflistings
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\begin{multicols}{2}    % 2 columns
+	\input{conteudo}
+\end{multicols}
+
+%	\ifCLASSOPTIONcaptionsoff
+%\newpage
+%	\fi
+
+	\bibliographystyle{ieeetr}%{abnt-num}%{ieeetr}%{abnt-alf}
+	\bibliography{bibliography}		% expects file "bibliography.bib" 
+
+	%\else
+	%\begin{thebibliography}{6} 
+	%O Número implica na quantidade MÁXIMA de itens que pode haver de bibliografias.
+	%Altere-o se tiver usado mais que duas fontes.
+
+	%\bibitem{IEEEhowto:kopka}
+	%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+	%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+	%\bibitem{Wakerly}
+	%John F. Wakerly, \emph{Digital Design: Principles and Practices}, 3rd~ed.
+	%	\hskip 1em plus 0.5em minus 0.4em\relax Prentice Hall, 1999.
+
+	%\bibitem{zelenovsky}
+	%Mendonça A. e Zelenovsky R., \emph{Eletrônica Digital: Curso Prático e Exercícios}, MZ Editora, Brasil, 2004.
+	%Contemporary Logic Design - Katz R. H., First Edition, 1993.	
+
+	%\end{thebibliography}
+	%\fi
+
+%	\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{./fts/luiz}}]{\luiz}\label{luiz}
+%	É, sou eu. Aparecendo aqui só de brinks. Meio que trollando um relatório.
+%	\end{IEEEbiography}
+
+\appendices
+		\input{apendice}
+		
+		
+\end{document}
+
+
