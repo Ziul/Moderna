@@ -34,17 +34,19 @@ else:
 os.system('clear')
 ser.flushInput()
 print "Aperte Ctrl+C para terminar a leitura\n\n"
-try:
-	while True:
-		msg = ser.read()
+while True:
+	try:
+#		msg = ser.read()
+		msg = ser.readline()
 		print msg 
+	except KeyboardInterrupt:
+		print "\rFim da leitura!"
+		break	
+	finally:
 		f.write(msg)
-except KeyboardInterrupt:
-	print "\rFim da leitura!"	
-finally:
-	ser.close()
+ser.close()
 
-f.write('\n')
+#f.write('\n')
 
 print "Fechando arquivo \"saida.txt\""
 f.close()
