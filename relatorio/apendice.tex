@@ -41,61 +41,83 @@
 
 
 %\begin{multicols}{4}
-\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+\tikzstyle{cloud} = [draw, ellipse,fill=blue!20, node distance=3cm,
     minimum height=2em]
+\tikzstyle{estado} = [draw, rectangle,fill=red!20, node distance=3cm,align=left]
+\tikzstyle{teste} = [draw, diamond,fill=green!20, node distance=3cm,align=left]
+%    minimum height=2em]
 \tikzstyle{phanton} = []   
-\tikzstyle{line} = [->,bend left] %[draw, -latex']
-\tikzstyle{arrow} = [loop above]
+\tikzstyle{line} = [->,right] %[draw, -latex']
+\tikzstyle{retorno} = [loop above]
+\tikzstyle{arrow} = [bend left,->]
+
 
 \begin{center}
 \begin{tikzpicture}[node distance = 2cm]
 	\tiny\ttfamily
 	%-- Estados
-	\node [cloud] (E0) at(0,2) {E0};
-	\node [cloud] (E1) at(2,1) {E1};
-	\node [cloud] (E2) at(2,-1) {E2};
-	\node [cloud] (E3) at(0,-2) {E3};
-	\node [cloud] (E4) at(-2,-1) {E4};
-	\node [cloud] (E5) at(-2,1) {E5};
-	%-- setas
-	\path (E0) edge [line] (E1);
+	\node [cloud] (init) at(0,0) {Inicio};
+	\node [estado] (E1) at(2,0) {Inicializa\\ UART e ADC};
+	\node [estado] (E2) at(4,0) {Captura ADC};
+	\node [estado] (E3) at(4,-2) {Escreve ADC na UART};
+	%-- Setas
+	\path (init) edge [line] (E1);
 	\path (E1) edge [line] (E2);
-	\path (E2) edge [line] (E3);
-	\path (E3) edge [line] (E4);
-	\path (E4) edge [line] (E5);
-	\path (E5) edge [line] (E0);
-	%-- Desvios
-	\path (E0) edge [draw,loop above] node{controle1=1} (E0);
-	\path (E3) edge [draw,loop below] node{controle2=1} (E3);
-	\path (E2) edge [bend right,->]  node[anchor=east]{controle1=1\&\&controle2=0} (E0);
-	\path (E5) edge [bend right,->]  node[anchor=west]{controle1=0\&\&controle2=1} (E3);
+	\path (E2) edge [bend right,->] (E3);
+	\path (E3) edge [bend right,->] (E2);
 \end{tikzpicture}
-\\\hypertarget{diagrama}{Diagrama de Estados}
+\\\hypertarget{diagrama}{Fluxograma do microcontrolador}
 \end{center}
 
-\begin{circuitikz}[american, scale = 2] \draw
-(0,0) node[op amp] (opamp) {}
-(opamp.+) node[left ] {$v_+$}
-(opamp.-) node[left] {$v_-$}
-(opamp.out) node[right] {$v_o$}
-(opamp.down) node[ground] {}
-(opamp.up) ++ (0,.5) node[above] { {12}{V}} -- (opamp.up)
-;\end{circuitikz}
 
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm]
+	\tiny\ttfamily
+	%-- Estados
+	\node [cloud] (init) at(0,0) {Inicio};
+	\node [estado] (E1) at(1,1) {Inicializa\\ serial};
+	\node [estado] (E2) at(3,1) {Abre/Cria\\ arquivos};
+	\node [teste] (E3) at(5,1) {interrupção\\ do teclado};
+	\node [estado] (E4) at(7,1) {Fecha arquivo\\ e serial};
+	\node [estado] (E5) at(5,-1) {lê string\\da serial};
+	\node [estado] (E6) at(5,-3) {escreve string\\ no arquivo};
+	\node [cloud] (fim) at(7,-1) {fim};
+	%-- Setas
+	\path (init) edge [line] (E1);
+	\path (E1) edge [line] (E2);
+	\path (E2) edge [line] (E3);
+%	\path (E3) edge [line]   (E4); % S
+	\draw [line] node at(5.8,1.1) {S} (E3) --  (E4);
+%	\path (E3) edge [line] (E5); % N
+	\draw [line] node at(5,0.1) {N} (E3) --  (E5);
+	\path (E5) edge [line] (E6);
+	\path (E6) edge [arrow] (E3);
+	\path (E4) edge [line] (fim);
+	
+\end{tikzpicture}
+\\\hypertarget{diagrama}{Fluxograma do computador}
+\end{center}
 
 
 \begin{figure}[H]
 \begin{center}\begin{circuitikz} \draw
-	(0,0) to [R=$R_1$,*-] (2,0) --
-	(2,0) to [R=$R_1$, i=$i _1$, v=$v_1$] (4,0) --
-	(4,0) to [C=$R_1$, i=$i _1$, v=$v_1$] (4,2) --
-	(4,2) to [R, -*] (1,2)
-	(0,4) to [ sI=$a_1$] (2,4)
-	(3,4) to [ I=$a_1$] (5,4)
+	(0,0) node[anchor=east]{$V_{ref}$}
+	(6,0) node[anchor=west]{$Ad_0$}
+	(0,0) to [R=$R_1$,*-] (3,3) 
+	(6,0) to [pR=$LDR$, v=$v_1$,*-] (0,0)
+	(3,-3) to [R=$R_2$,*-] (0,0)
+	(4.5,-1.5) to [R=$R_3$,*-] (3,-3)
+	(6,0) to [pR=$R_4$,*-*] (4.5,-1.5)
+	(3,3) to [R=$R_5$,*-*] (6,0)
+	(3,-3) node[ground] {};
+\draw (3,3) -- node[] {} (3,3.5);
+\draw (2.5,3.5) --  node[anchor=south] {VCC} (3.5,3.5)  node[anchor=west] {\SI{5}{V}};
+
 ; \end{circuitikz} \end{center}
-\caption{circuito perdido}
+\caption{Circuito do LDR}
 \label{ce1}
 \end{figure}
+
 
 %\end{multicols}
 
