@@ -4,6 +4,8 @@ import os			# metodos para SO
 import subprocess	# para o gnuplot
 import sys			# para ter acesso aos parametros
 
+def floatraw( aString ):
+    return eval( aString )
 """
 import signal		# pegando sinais como em C
 
@@ -26,6 +28,7 @@ except IndexError:
 
 if ser.isOpen() & ser.readable():
 	f=file('./saida.txt','w')
+	fx=file('./trabalhada.txt','w')
 else:
 	print "Porta nao acessivel"
 	sys.exit(0)
@@ -44,12 +47,16 @@ while True:
 		break	
 	finally:
 		f.write(msg)
+		vsel = eval(msg.split(" ")[1])*5/1023.0
+		fx.write(msg.split(" ")[0] + " %.2f\n" % vsel)
+
 ser.close()
 
 #f.write('\n')
 
 print "Fechando arquivo \"saida.txt\""
 f.close()
+fx.close()
 print "Serial fechada. Abrindo o GNUPLOT"
 
 proc = subprocess.Popen(['gnuplot','-p'], 
@@ -59,4 +66,8 @@ proc = subprocess.Popen(['gnuplot','-p'],
                         
 proc.stdin.write("plot 'saida.txt' with lines\n")
 proc.stdin.write("pause mouse\n")
+
+proc.stdin.write("plot 'trabalhada.txt' with lines\n")
+proc.stdin.write("pause mouse\n")
+
 proc.stdin.write("quit\n")
