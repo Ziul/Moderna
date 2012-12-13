@@ -118,6 +118,34 @@
 \label{ce1}
 \end{figure}
 
+%--------------------------------
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=2]
+%  \draw[decorate,style=help lines] (-2,-2) grid[step=1cm] (4,4);
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,0.9)   rectangle (5.5,0.5); % barra de baixo
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,4.4)   rectangle (5.5,4.1); % barra de cima
+	\draw[decorate,thick,fill=yellow] (0,0) -- (0,5) -- (2,5) -- (2,0) -- (0,0); % primeira chapa
+	\draw[decorate,thick,fill=yellow] (3,0) -- (3,5) -- (5,5) -- (5,0) -- (3,0); % segudna chapa
+	\draw[decorate,thick,fill=red] (2.4,0) -- (2.4,5) -- (2.6,5) -- (2.6,0) -- (2.4,0); % arame
+	\draw[decorate,|-|] (2,-0.3cm) -- (2.3,-0.3cm); % distancia da primeira fenda
+	\draw[decorate,|-|] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+%	\draw[decorate,|-|,dashed] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+	% notas
+	\node[black,scale=0.6] at (1,2.5) {Chapa 1};
+	\node[black,scale=0.6] at (4,2.5) {Chapa 2};
+	\node[black,scale=0.6] at (2.5,5.2) {Arame};
+	\node[black,scale=0.6] at (-1cm,0.7) {Barra de fixação ->};
+	\node[black,scale=0.6] at (-1cm,4.2) {Barra de fixação ->};
+	\node[black,scale=0.8] at (2.15,-0.5cm) {$\lambda$};
+	\node[black,scale=0.8] at (2.85,-0.5cm) {$\lambda$};
+
+  
+\end{tikzpicture}
+\end{center}
+\caption{Fenda dupla}
+\label{fenda}
+\end{figure}
 
 %\end{multicols}
 
