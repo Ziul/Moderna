@@ -14,11 +14,11 @@
 #define PORT_DIR P2DIR
 #define PORT_OUT P2OUT
 
-#define CS	   BIT0
-#define RESET  BIT1
-#define RS	   BIT2
-#define DATA   BIT3
-#define CLK    BIT4
+#define RS	BIT0
+#define RESET	BIT1
+#define CS	BIT2
+#define CLK   	BIT3
+#define DATA    BIT4
 
 # define S65_WIDTH            (176)
 # define S65_HEIGHT           (132)
