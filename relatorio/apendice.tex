@@ -118,7 +118,6 @@
 \label{ce1}
 \end{figure}
 
-%--------------------------------
 \begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}[decoration=penciline, decorate,scale=2]
@@ -139,13 +138,38 @@
 	\node[black,scale=0.6] at (-1cm,4.2) {Barra de fixação ->};
 	\node[black,scale=0.8] at (2.15,-0.5cm) {$\lambda$};
 	\node[black,scale=0.8] at (2.85,-0.5cm) {$\lambda$};
-
-  
 \end{tikzpicture}
 \end{center}
 \caption{Fenda dupla}
 \label{fenda}
 \end{figure}
+
+
+%--------------------------------
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=2]
+	\draw[thick] (0,0) -- (0,2.4) ; % barra de baixo
+	\draw[thick] (0,2.6) -- (0,5) ; % barra de cima
+	\draw[thick] (3,0) -- (3,5) ; % barra de choque
+	\draw[line] (-1,2.5) -- (-0.2,2.5) ; % barra de choque
+	% ondas primarias
+	\foreach \A in {0,0.1,0.2,0.3,0.4,0.5} {
+		\draw[thick] (-0.8 + \A,2) -- (-0.8 + \A,3) ;
+	}
+	\node[black,scale=0.8] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
+	% ondas após a fenda
+	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4} {
+		\draw[thick] (0.2+\A,2.0-\A) -- (0.2+\A,2.01-\A) arc (-70:70:0.5+\A) ;
+	}
+\end{tikzpicture}
+\end{center}
+\caption{Difração em fenda simples}
+\label{fenda}
+\end{figure}
+
+
+
 
 %\end{multicols}
 
