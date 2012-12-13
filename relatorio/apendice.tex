@@ -141,11 +141,9 @@
 \end{tikzpicture}
 \end{center}
 \caption{Fenda dupla}
-\label{fenda}
+\label{fenda_dupla}
 \end{figure}
 
-
-%--------------------------------
 \begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}[decoration=penciline, decorate,scale=2]
@@ -165,10 +163,45 @@
 \end{tikzpicture}
 \end{center}
 \caption{Difração em fenda simples}
-\label{fenda}
+\label{diff_simples}
 \end{figure}
 
 
+%--------------------------------
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=2]
+	\draw[thick] (0,0) -- (0,2.2) ; % barra de baixo
+	\draw[thick] (0,2.4) -- (0,2.6) ; % barra de baixo
+	\draw[thick] (0,2.8) -- (0,5) ; % barra de cima
+	\draw[thick] (3,0) -- (3,5) ; % barra de choque
+	\draw[line] (-1,2.5) -- (-0.2,2.5) ; % barra de choque
+	% ondas primarias
+	\foreach \A in {0,0.1,0.2,0.3,0.4,0.5} {
+		\draw[thick] (-0.8 + \A,2) -- (-0.8 + \A,3) ;
+	}
+	\node[black,scale=0.8] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
+	% ondas após a fenda
+	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6} {
+		\draw[thick,color=red] (0.1+\A,2-\A) -- (0.1+\A,2.01-\A) arc (-70:70:0.3+\A) ;
+	}
+	% ondas após a fenda
+	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6} {
+		\draw[thick,color=green] (0.1+\A,2.4-\A) -- (0.1+\A,2.41-\A) arc (-70:70:0.3+\A) ;
+	}
+	% colisão das ondas
+	\draw[dashed,->] (0,2.4) -- (5:3.5cm) ; % colisão 1
+	\draw[dashed,->] (0,2.6) -- (50:5.5cm) ; % colisão 2
+	\draw[dashed,->] (0,2.5) -- (34:4.3) ; % colisão 3
+	
+	\node[black,scale=0.8] at (4.2,2.4) {Colisão das ondas};
+	\node[black,scale=0.8] at (4.2,4.2) {Colisão das ondas};
+	\node[black,scale=0.8] at (4.16,0.22) {Colisão das ondas};
+\end{tikzpicture}
+\end{center}
+\caption{Difração em fenda dupla}
+\label{diff_dupla}
+\end{figure}
 
 
 %\end{multicols}
