@@ -182,21 +182,21 @@
 	}
 	\node[black,scale=0.8] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
 	% ondas após a fenda
-	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6} {
-		\draw[thick,color=red] (0.1+\A,2-\A) -- (0.1+\A,2.01-\A) arc (-70:70:0.3+\A) ;
+	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4} {
+		\draw[thick,color=red] (0.02+\A,2-\A) -- (0.02+\A,2.01-\A) arc (-85:85:0.3+\A) ;
 	}
 	% ondas após a fenda
-	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6} {
-		\draw[thick,color=green] (0.1+\A,2.4-\A) -- (0.1+\A,2.41-\A) arc (-70:70:0.3+\A) ;
+	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4} {
+		\draw[thick,color=green] (0.02+\A,2.4-\A) -- (0.02+\A,2.41-\A) arc (-85:85:0.3+\A) ;
 	}
 	% colisão das ondas
-	\draw[dashed,->] (0,2.4) -- (5:3.5cm) ; % colisão 1
-	\draw[dashed,->] (0,2.6) -- (50:5.5cm) ; % colisão 2
-	\draw[dashed,->] (0,2.5) -- (34:4.3) ; % colisão 3
+	\draw[dashed,->] (0.3,2.2) -- (10:3.5cm) ; % colisão 1
+	\draw[dashed,->] (0.31,2.81) -- (52:5.5cm) ; % colisão 2
+	\draw[dashed,->] (0.3,2.5) -- (35:4.3) ; % colisão 3
 	
-	\node[black,scale=0.8] at (4.2,2.4) {Colisão das ondas};
-	\node[black,scale=0.8] at (4.2,4.2) {Colisão das ondas};
-	\node[black,scale=0.8] at (4.16,0.22) {Colisão das ondas};
+	\node[black,scale=0.8] at (4.05,4.35) {Colisão das ondas};
+	\node[black,scale=0.8,align=left] at (4.25,2.46) {Colisão das ondas\\ com maior intensidade};
+	\node[black,scale=0.8] at (4.1,0.55) {Colisão das ondas};
 \end{tikzpicture}
 \end{center}
 \caption{Difração em fenda dupla}
