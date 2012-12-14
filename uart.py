@@ -1,11 +1,12 @@
 #!/usr/bin/python
 import serial		# metodos para a serial
 import os			# metodos para SO
-import subprocess	# para o gnuplot
+import subprocess	# para subprocessos (gnuplot)
 import sys			# para ter acesso aos parametros
 
 def floatraw( aString ):
     return eval( aString )
+
 """
 import signal		# pegando sinais como em C
 
@@ -28,7 +29,9 @@ except IndexError:
 
 if ser.isOpen() & ser.readable():
 	f=file('./saida.txt','w')
-	fx=file('./trabalhada.txt','w')
+	fx=file('./trabalhada.tex','w')
+	fx.write("(0,0) " )
+
 else:
 	print "Porta nao acessivel"
 	sys.exit(0)
@@ -39,7 +42,6 @@ ser.flushInput()
 print "Aperte Ctrl+C para terminar a leitura\n\n"
 while True:
 	try:
-#		msg = ser.read()
 		msg = ser.readline()
 		print msg 
 	except KeyboardInterrupt:
@@ -47,8 +49,8 @@ while True:
 		break	
 	finally:
 		f.write(msg)
-		vsel = eval(msg.split(" ")[1])*5/1023.0
-		fx.write(msg.split(" ")[0] + " %.2f\n" % vsel)
+		vsel = eval(msg.split(" ")[0])/10.0
+		fx.write("-- (%.2f,%.2f) " % (vsel,  eval(msg.split(" ")[1])/100.0  ) )
 
 ser.close()
 
@@ -65,9 +67,6 @@ proc = subprocess.Popen(['gnuplot','-p'],
                         )
                         
 proc.stdin.write("plot 'saida.txt' with lines\n")
-proc.stdin.write("pause mouse\n")
-
-proc.stdin.write("plot 'trabalhada.txt' with lines\n")
 proc.stdin.write("pause mouse\n")
 
 proc.stdin.write("quit\n")
