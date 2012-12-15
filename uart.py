@@ -69,4 +69,8 @@ proc = subprocess.Popen(['gnuplot','-p'],
 proc.stdin.write("plot 'saida.txt' with lines\n")
 proc.stdin.write("pause mouse\n")
 
+proc.stdin.write("set terminal latex\n")
+proc.stdin.write("set output \"graph.tex\" \n")
+proc.stdin.write("plot 'saida.txt' with lines\n")
 proc.stdin.write("quit\n")
+os.system('cp graph.tex ./relatorio/')
