@@ -41,11 +41,33 @@ Podemos também incluir uma citação babaca tipo:
 
 Podemos também incluir algo do código tipo: \lstinline [basicstyle=\ttfamily]{printf("oi!")} ou assim:
 
-\begin{lstlisting}[basicstyle=\ttfamily]
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=none]  % Assim fica de um tamanho aceitavel e sem os números das linhas do lado
 	startup(9600);
 	printf("Debug preparado:\n");
 \end{lstlisting}
 
+Por fim, podemos incluir também algumas equações com o seguinte trecho, podendo citar ela no texto como \ref{frequencia} quando bem entendermos:
+
+\begin{equation}\label{frequencia}
+	f= \frac{1}{\lambda}
+\end{equation}
+
+Ou uma sequencia de equações assim (usando o \& para manter as linhas alinhadas:
+% O * server para não incluir uma numeração nas equações
+
+\begin{align*}
+	\lambda =& \frac{2dY}{nD} \\
+			& n=1,2,3,4...n
+\end{align*}
+
 \lipsum
 
-\input graph
+\end{multicols}
+\begin{center}
+	\input graph
+\end{center}
+	
+\begin{multicols}{2}    % 2 columns
+
+\lipsum
+
