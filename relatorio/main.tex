@@ -17,6 +17,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage[english,brazil]{babel}	
 \usepackage[T1]{fontenc}
+\usepackage{amsmath}
 \usepackage{wasysym}				% setas
 \usepackage{picinpar}				% figuras onde eu quero, problemas com referencias
 \usepackage{sidecap}				% legenda ao lado da figura
@@ -29,7 +30,6 @@
 \usepackage{lipsum}
 \usepackage{csquotes}
 \usepackage{alltt}
-
 
 \usepackage{ifsym}
 \usepackage{pifont}
@@ -74,7 +74,7 @@ literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {õ}{{\~o}}1 {í}{{\'i}}1 {ó}{{
 breaklines=true,
 showstringspaces=false,
 stringstyle=\color{cyan},
-basicstyle=\tiny\ttfamily}
+basicstyle=\small\ttfamily}
 % Inclua o source com: \lstinputlisting[language=C]{src/src.c}
 
 \lstdefinelanguage{MSP430}
@@ -91,6 +91,19 @@ morecomment=[l]{;},
 morecomment=[s]{/*}{*/},
 }
 % Inclua o source com: \lstinputlisting[language=MSP430]{src/src.asm}
+
+\lstdefinestyle{Bash}
+{language=bash,
+keywordstyle=\color{blue},
+basicstyle=\small\ttfamily,
+morekeywords={user@DESKTOP},
+alsoletter={:~$},
+morekeywords=[2]{peter@kbpet:},
+keywordstyle=[2]{\color{red}},
+literate={\$}{{\textcolor{red}{\$}}}1 
+         {:}{{\textcolor{red}{:}}}1
+         {~}{{\textcolor{red}{\textasciitilde}}}1,
+}
 
 %
 %%------------------------------------------------------------------------------
@@ -311,7 +324,7 @@ morecomment=[s]{/*}{*/},
 	\IEEEpeerreviewmaketitle
 
 
-\newpage
+%\newpage
 \pagestyle{headings}
 \setcounter{page}{1}
 \pagenumbering{roman}

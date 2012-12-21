@@ -1,0 +1,107 @@
+
+\section{Crianção do Circuito}\label{circuit}
+
+\IEEEPARstart{P}{ara} a criação do circuito, precisamos inicialmente entender como funciona uma ponte de \textit{Wheatstone}.
+
+\subsection{Ponte de Wheatstone}\label{wheatstone}
+
+A ponte de Wheatstone é utilizada quando queremos balancear um circuito com  uma resistência desconhecida. A ponte é comumente caracterizada pelo desenho na figura \ref{ponte}, onde pode-se obter uma corrente no amperímetro igual a zero quando a seguinte equação é respeitada:
+
+\begin{equation}\label{ponte_eq}
+	R_1\cdot R_x=R_3\cdot R_2
+\end{equation}
+
+Quando a equação \ref{ponte_eq} é respeitada, as tenções entre os pontos \textbf{A} e \textbf{B} é a mesma, de forma que não existe corrente nestes pontos
+
+\begin{figure}[H]
+\begin{center}\begin{circuitikz} \draw
+	(0,0) to [R=$R_1$,*-*] (3,3)
+	(0,0) to [R=$R_3$,*-*] (3,-3)
+	(3,-3) to [R=$R_x$,*-*] (6,0)
+	(3,3) to [R=$R_2$,*-*] (6,0)
+	(0,0)to[ammeter] (6,0)
+	(3,-3) node[ground] {};
+	\draw (3,3) -- node[] {} (3,3.5);
+	\draw (2.5,3.5) --  node[anchor=south] {VCC} (3.5,3.5)  node[anchor=west] {};
+	\draw (0,0) node[anchor=east]{$A$};
+	\draw (6,0) node[anchor=west]{$B$};
+
+; \end{circuitikz} \end{center}
+\caption{Ponte de Wheatstone}
+\label{ponte}
+\end{figure}
+
+\subsection{Abstração da ponte para o circuito final}\label{cirt_final_sec}
+
+
+Com base no conhecimento obtido na sessão \ref{wheatstone}, podemos inferir que no circuito da figura \ref{final0} teremos equilíbrio se:
+
+
+\begin{align*}
+	R_1\cdot R_x &=R_3\cdot R_2 \text{ , sendo} \\
+			R_x &= \frac{(R_3+LDR)\cdot R_4}{(R_3+LDR)+ R_4}
+\end{align*}
+
+Para uma maior facilidade em montar o circuito, podemos considerar que $R_1=R_2=R_3=R$. Outra fator importante é considerar o range da resistência que o $LDR$ adota de acordo com a intensidade de luz.
+
+Normalmente, um $LDR$ possui resistência em torno de $100 \ohm$ quando exposto a luz e $10^6 \ohm$ quando em completa escuridão.
+
+\begin{figure}[H]
+\begin{center}\begin{circuitikz}[scale=1] \draw
+	(0,0) node[anchor=east]{$V_{ref}$}
+	(6,0) node[anchor=west]{$1023-Ad_0$}
+	(4.5,-1.5) node[anchor=west]{$Ad_0$}
+	(0,0) to [R=$R_1$,*-] (3,3) 
+%	(6,0) to [pR=$LDR$, v=$v_1$,*-] (0,0)
+	(3,-3) -- node[*-*] {} (3,-1.5)
+	(6,0) -- node[*-*] {} (4.5,0)
+	(3,-1.5) to [R=$R_4$,*-*] (4.5,0)
+	(3,-3) to [R=$R_2$,*-] (0,0)
+	(4.5,-1.5) to [R=$R_3$,*-] (3,-3)
+	(6,0) to [pR=$LDR$,*-*] (4.5,-1.5)
+	(3,3) to [R=$R_5$,*-*] (6,0)
+	(3,-3) node[ground] {};
+\draw (3,3) -- node[] {} (3,3.5);
+\draw (2.5,3.5) --  node[anchor=south] {VCC} (3.5,3.5)  node[anchor=west] {\SI{5}{V}};
+
+; \end{circuitikz} \end{center}
+\caption{Circuito do LDR}
+\label{final0}
+\end{figure}
+
+Com base neste range e,  adotando um valor para $r=10 K\ohm$, podemos chegar as seguintes equações:
+
+\begin{align*}
+		R\cdot R_x &=R\cdot R \\
+		R_x &= R \\
+		R_x &= \frac{(R_3+LDR)\cdot R_4}{(R_3+LDR)+ R_4} \\
+		R_x &= \frac{(R+LDR)\cdot R}{(R+LDR)+ R} = 10^3  \\
+		10^3 &= \frac{(R+LDR)\cdot R}{(R+LDR)+ R} \\
+		\text{Tal que: } & 10^2\ohm<R<10^6\ohm
+\end{align*}
+
+Podemos observar que assumindo $R3=8.2\cdot 10^3\ohm$, temos o valor de $R4$ muito próximo para ambos os casos ($10^3$ e $1.2\cdot 10^3$). Assim, uma possibilidade para o circuito final que abranja quase todo o range de resistência do $LDR$ é o seguinte circuito:
+
+
+\begin{figure}[H]
+\begin{center}\begin{circuitikz}[scale=1] \draw
+	(0,0) node[anchor=east]{$V_{ref}$}
+	(6,0) node[anchor=west]{$1023-Ad_0$}
+	(4.5,-1.5) node[anchor=west]{$Ad_0$}
+	(0,0) to [R=$10K\ohm$,*-] (3,3) 
+%	(6,0) to [pR=$LDR$, v=$v_1$,*-] (0,0)
+	(3,-3) -- node[*-*] {} (3,-1.5)
+	(6,0) -- node[*-*] {} (4.5,0)
+	(3,-1.5) to [R=$1K\ohm$,*-*] (4.5,0)
+	(3,-3) to [R=$10K\ohm$,*-] (0,0)
+	(4.5,-1.5) to [R=$8.2\cdot K\ohm$,*-] (3,-3)
+	(6,0) to [pR=$LDR$,*-*] (4.5,-1.5)
+	(3,3) to [R=$10K\ohm$,*-*] (6,0)
+	(3,-3) node[ground] {};
+\draw (3,3) -- node[] {} (3,3.5);
+\draw (2.5,3.5) --  node[anchor=south] {VCC} (3.5,3.5)  node[anchor=west] {\SI{5}{V}};
+
+; \end{circuitikz} \end{center}
+\caption{Circuito proposto do LDR}
+\label{final}
+\end{figure}

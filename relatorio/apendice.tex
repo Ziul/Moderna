@@ -16,7 +16,7 @@
 %caption={[ short ] long }
 
 \hypertarget{main}{
-\lstinputlisting[language=C,caption={[main.c]Código principal},label=main]{../trunk/main.c} }
+\lstinputlisting[language=C,caption={[main.c]Código principal},label=main]{/home/luiz/Documents/UnB/Adson/Arduino/teste_eclipse/main.cpp} }
 
 \end{multicols}
 
@@ -102,19 +102,23 @@
 \begin{figure}[H]
 \begin{center}\begin{circuitikz} \draw
 	(0,0) node[anchor=east]{$V_{ref}$}
-	(6,0) node[anchor=west]{$Ad_0$}
+	(6,0) node[anchor=west]{$1023-Ad_0$}
+	(4.5,-1.5) node[anchor=west]{$Ad_0$}
 	(0,0) to [R=$R_1$,*-] (3,3) 
-	(6,0) to [pR=$LDR$, v=$v_1$,*-] (0,0)
+%	(6,0) to [pR=$LDR$, v=$v_1$,*-] (0,0)
+	(3,-3) -- node[*-*] {} (3,-1.5)
+	(6,0) -- node[*-*] {} (4.5,0)
+	(3,-1.5) to [R=$R_4$,*-*] (4.5,0)
 	(3,-3) to [R=$R_2$,*-] (0,0)
 	(4.5,-1.5) to [R=$R_3$,*-] (3,-3)
-	(6,0) to [pR=$R_4$,*-*] (4.5,-1.5)
+	(6,0) to [pR=$LDR$,*-*] (4.5,-1.5)
 	(3,3) to [R=$R_5$,*-*] (6,0)
 	(3,-3) node[ground] {};
 \draw (3,3) -- node[] {} (3,3.5);
 \draw (2.5,3.5) --  node[anchor=south] {VCC} (3.5,3.5)  node[anchor=west] {\SI{5}{V}};
 
 ; \end{circuitikz} \end{center}
-\caption{Circuito do LDR}
+\caption{Idealização do circuito do LDR}
 \label{ce1}
 \end{figure}
 
