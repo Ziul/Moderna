@@ -104,7 +104,7 @@ void setup()
 
 Observe que a UART é inicializada com rate de 9600, enquanto o conversor é configurado para usar a referencia de tensão externa. A velocidade de 9600 é uma faixa de velocidade bem comum em comunicações seriais. Já a referencia externa é necessária devido ao circuito que foi proposto na sessão \ref{cirt_final_sec}, onde a figura \ref{final} apresenta uma tensão de referencia.
 
-Com o chip já configurado, o próximo passo é configurar a função $loo$ para que o processo de captura do valor do ADC e impressão deste valor seja mantido enquanto o chip estiver alimentado.
+Com o chip já configurado, o próximo passo é configurar a função $loop$ para que o processo de captura do valor do ADC e impressão deste valor seja mantido enquanto o chip estiver alimentado.
 
 
 
@@ -115,7 +115,8 @@ void loop()
 static int i=0;
 char buf[20];
 
-	sprintf(buf,"%d %d\n",i++,analogRead(0) );
+	sprintf(buf,"%d %d\n",
+		i++,analogRead(0));
 	Serial.print(buf);
 }
 \end{lstlisting}
