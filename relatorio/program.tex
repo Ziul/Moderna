@@ -1,8 +1,14 @@
-\section{Levantando o programa}\label{program}
+\section{Colhendo dados reais - Arduino}\label{arduino}
+
+Para coletar os dados expostos será necessário o uso de um microcontrolador que tenha um conversor analógico-digital para mensurar os níveis de intensidade da luz projetados pelo laser após a fenda. Para tal atividade, será utilizado um kit UNO Arduíno e os dados serão transmitidos através de uma comunicação serial RS232.
+
+%\section{Programando o Arduino}\label{arduino}
+
+\subsection{Levantando o programa}\label{program_arduino}
 
 Inicialmente, é importante frisar que o kit do Arduíno nada mais é que uma camada de abstração criada acima do microcontrolador AVR. Desta forma, podemos programar nos kits do Arduíno de duas formas sob o sistema Linux:
 
-\subsection{Shield Comum}\label{noob}
+\subsubsection{Shield Comum}\label{noob}
 
 A forma mais simples de utilizar um kit do Arduíno é utilizando a própria IDE oferecida para o kit. A sua instalação é bem simples e fácil de ser feita. Basta entrar com o seguinte comando no terminal:
 
@@ -23,7 +29,7 @@ Desta forma, podemos acessar a IDE do Arduíno, que pode ser observada na figura
 \end{figure}
 \begin{multicols}{2}    % 2 columns
 
-\subsection{Utilizando o Eclipse para o Arduino}\label{eclipse}
+\subsubsection{Utilizando o Eclipse para o Arduino}\label{eclipse}
 
 Porém há alguns grandes inconvenientes ao utilizar a IDE do Arduino.
 
@@ -36,11 +42,14 @@ Porém há alguns grandes inconvenientes ao utilizar a IDE do Arduino.
 Desta forma, uma opção interessante é utilizar o Eclipse para programar o Arduíno. Isso requer alguns conceitos mais avançados de programação que não serão descritos neste relatório, que são eles:
 
 \begin{itemize}
+	\item Instalação do \textit{avr-gcc} e \textit{avrdude}
 	\item Criação de uma biblioteca estática com os arquivos em $/usr/shared/arduino$.
 	\item Inclusão do diretório $/usr/shared/arduino$ nas dependências da compilação.
 	\item Configuração da compilação com as flags $-Os$,$-O3$ e $-g$.
-	\item Instalação do plugin de AVR no Eclipse e do AvrDude
+	\item Instalação do plugin de AVR e do AVRDude no Eclipse.
 \end{itemize}
+
+Um passo a passo de como proceder com a configuração do Eclipse para uso do Arduíno pode ser observado em \cite{eclipse}.
 
 Outro fator interessante de se usar o Eclipse é a necessidade de fazer uma função $main$, já que esta é descartada pela IDE do Arduíno. Abaixo segue um exemplo de como a função $main$ poderia ser escrita para ter um funcionamento semelhante ao da IDE do Arduíno, facilitando assim a compatibilidade entre os códigos.
 
@@ -65,7 +74,7 @@ int main(void)
 
 Observe que este código mantem toda a estrutura básica do Arduíno, assim como a inclusão do header $Arduino.h$, necessário para a inclusão das rotinas básicas do Arduíno, assim como sua configuração.
 
-\subsection{Criação do Código}\label{making}
+\subsection{Criação do Código}\label{making_arduino}
 
 Com o ambiente de trabalho já configurado, o próximo passo é levantar o programa que funcione de acordo com o diagrama, apresentado na figura \ref{flux_micro}.
 
@@ -108,7 +117,7 @@ Com o chip já configurado, o próximo passo é configurar a função $loop$ par
 
 
 
-\begin{lstlisting}[basicstyle=\ttfamily,numbers=none,caption={[setup()]Código da função setup()}]
+\begin{lstlisting}[basicstyle=\ttfamily,numbers=none,caption={[loop()]Código da função loop()}]
 
 void loop()
 {
@@ -122,10 +131,90 @@ char buf[20];
 \end{lstlisting}
 
 Desta forma, os valores serão impressos na porta serial com a formatação \textit{"x y"}, estando assim prontos para serem plotados no GNUPLOT. No apêndice \ref{src} pode-se observar na integra este código no Listing
-\ref{main}, onde haverá a inclusão de alguns headers e alguns tempos no decorrer do programa para garantir uma maior estabilidade do código.
+\ref{main_c}, onde haverá a inclusão de alguns headers e alguns tempos no decorrer do programa para garantir uma maior estabilidade do código.
 
 
 
+\section{Coletando os dados no computador - Python}\label{python}
+
+Com o processo realizado na sessão \ref{arduino}, qualquer equipamento capacitado para a leitura de comunicação serial poderá realizar a leitura dos dados. Trabalhar com os dados no computador é incrivelmente mais fácil que em um microcontrolador. A taxa de processamento e a memoria disponível são extremamente maiores, sem dizer que as camadas de abstração existentes facilitam - e muito - o nosso trabalho. Isso poderá ser observado através do método que será utilizado para esta etapa. O objetivo é criar um programa em Python que faça a leitura dos dados na porta serial e exporte-os para o GNUPLOT, plotando o gráfico.
+
+\subsection{Python - o inicio}\label{python1}
+
+Python é uma linguagem interpretada orientada à objetos que, normalmente, já vem pré-instalada em grande parte das distribuições Linux. É uma linguagem consideravelmente fácil de ser aprendida e que poder ser incrivelmente útil e pratica. Para este nosso experimento, utilizaremos uma biblioteca do Python chamada \textit{\cite{pyserial}pyserial}, uma biblioteca voltada para a recepção e envio de dados através de comunicações seriais.
+
+Inicialmente, assim como em quase toda lingaugem de programação, iniciamos incluindo as bibliotecas que serão necessárias no decorrer do programa:
 
 
+\begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Bibliotecas do Python] Inclusão das bibliotecas do Python}]
 
+#!/usr/bin/python
+import serial
+import os
+import subprocess
+import sys
+
+\end{lstlisting}
+
+o trecho \lstinline [basicstyle=\ttfamily,language=Python]{#!/usr/bin/python} é muito comum é scripts em ambiente Linux. Quando colocados na primeira linha, este trecho possibilita que ao darmos direitos de execução ao script ( torna-lo executável), ele irá procurar pelo binario, em \textit{/usr/bin/python} no caso, para ser executado. Essa linha nos permite não ter que dar o trabalho de invocar o programa python, já que o script se encarregaria disto.
+
+Em seguida, devemos tentar abrir a porta na qual desejamos escutar. Para uma maior portabilidade do código, o programa foi montado de forma que o parâmetro enviado junto com a inicialização do script seria o endereço desejado, como pode-se ver logo abaixo:
+
+\begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Acessando a porta serial]Acessando a porta serial}]
+
+try:
+	ser = serial.Serial(sys.argv[1],9600)
+	ser.open()
+except IndexError:
+	print "Passe uma porta existente 
+		com o parametro!"
+	sys.exit(0)
+
+f=file('./saida.txt','w')
+
+\end{lstlisting}
+Com um conhecimento básico em orientação à objetos, conseguimos ver o quanto Python é intuitivo. Observe que o programa esta atrelado a uma velocidade de comunicação de 9600, assim como o código do arduino foi feito, na sessão \ref{making_arduino}.
+
+\subsection{Lendo os dados}\label{reading}
+
+
+Caso o programa consiga abrir a porta, devemos então começar a lê-la. Porém em momento algum foi dito quantos dados seriam lidos pela porta serial. Uma forma banal de contornar isto seria arbitrar um valor qualquer de leituras, mas há uma forma mais refinada de contornar este problema.
+
+Assim como em C, podemos trabalhar com interrupções do sistemas em Python. O que faremos então é manter o código preso em um laço infinito lendo as informações e gravando-as em um arquivo, enquanto não ocorrer uma interrupção do teclado (\textit{KeyboardInterrupt}).
+
+\begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Lendo dados]Lendo dados ininterruptamente}]
+
+print "Aperte Ctrl+C para terminar a leitura\n\n"
+while True:
+	try:
+		msg = ser.readline()
+		print msg 
+	except KeyboardInterrupt:
+		print "\rFim da leitura!"
+		break	
+	finally:
+		f.write(msg)
+		ser.close()
+
+\end{lstlisting}
+
+\subsection{Plotando os dados}\label{plotting}
+
+
+Observe que após este passo teremos um arquivo com todos os dados coletados e já com a formatação desejada pelo GNUPLOT, tudo o que temos que fazer é invocar o GNUPLOT e plotar o arquivo, algo que podemos fazer facilmente dentro do próprio Python:
+
+\begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Plotando os dados]Plotando os dados através do Python}]
+
+proc = subprocess.Popen(['gnuplot','-p'], 
+                        shell=True,
+                        stdin=subprocess.PIPE,
+                        )
+                        
+proc.stdin.write("plot 'saida.txt' with lines\n")
+proc.stdin.write("pause mouse\n")
+proc.stdin.write("quit\n")
+
+\end{lstlisting}
+
+Com isso, teremos ao final do script um gráfico plotado na tela com os valores coletados pela porta serial. No apêndice \ref{src} pode-se observar na integra este código no Listing
+\ref{main_py}, onde haverá a inclusão de alguns  comentários no código e interação com o usuário.

@@ -5,7 +5,7 @@
 
 \subsection{Ponte de Wheatstone}\label{wheatstone}
 
-A ponte de Wheatstone é utilizada quando queremos balancear um circuito com  uma resistência desconhecida. A ponte é comumente caracterizada pelo desenho na figura \ref{ponte}, onde pode-se obter uma corrente no amperímetro igual a zero quando a seguinte equação é respeitada:
+A ponte de Wheatstone, representada na figura \ref{ponte}, é utilizada quando queremos balancear um circuito com  uma resistência desconhecida. A ponte é comumente caracterizada pelo desenho na figura \ref{ponte}, onde pode-se obter uma corrente no amperímetro igual a zero quando a seguinte equação é respeitada:
 
 \begin{equation}\label{ponte_eq}
 	R_1\cdot R_x=R_3\cdot R_2
@@ -69,7 +69,7 @@ Normalmente, um $LDR$ possui resistência em torno de $100 \ohm$ quando exposto 
 \label{final0}
 \end{figure}
 
-Com base neste range e,  adotando um valor para $r=10 K\ohm$, podemos chegar as seguintes equações:
+Com base neste range e,  adotando um valor para $r=10 K\ohm$, podemos fazer alguns calculos na tentativa de obter alguns valores razoaveis para os resistores $R_4$ e $R_3$ que solucionem o sistema proposto:
 
 \begin{align*}
 		R\cdot R_x &=R\cdot R \\
@@ -80,8 +80,9 @@ Com base neste range e,  adotando um valor para $r=10 K\ohm$, podemos chegar as 
 		\text{Tal que: } & 10^2\ohm<LDR<10^6\ohm
 \end{align*}
 
-Podemos observar que assumindo $R_3=8.2\cdot 10^3\ohm$, temos o valor de $R_4$ muito próximo para ambos os casos ($10^3$ e $1.2\cdot 10^3$). Assim, uma possibilidade para o circuito final que abranja quase todo o range de resistência do $LDR$ é o seguinte circuito:
+Podemos observar que assumindo $R_3=8.2\cdot 10^3\ohm$, temos o valor de $R_4$ muito próximo para ambos os casos ($10^3$ e $1.2\cdot 10^3$). Assim, uma possibilidade para o circuito final que abranja quase todo o range de resistência do $LDR$ é o circuito apresentado na figura \ref{final}.
 
+Observe que este circuito permite a leitura de dados de forma distinta. Caso o pino do ADC seja conectado no ponto $1023-Ad_0$ teremos os dados expressos de forma inversa, ou seja, quanto maior a intensidade de luz, mais baixo serão os níveis de tensão coletados pelo microcontrolador. Já no ponto $Ad_0$ temos a leitura como esperada, ou seja, a amplitude do sinal coletado será diretamente proporcional à intensidade de luz observada pelo sensor.
 
 \begin{figure}[H]
 \begin{center}\begin{circuitikz}[scale=1] \draw
