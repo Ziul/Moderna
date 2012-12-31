@@ -149,14 +149,17 @@ Inicialmente, assim como em quase toda lingaugem de programação, iniciamos inc
 \begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Bibliotecas do Python] Inclusão das bibliotecas do Python}]
 
 #!/usr/bin/python
+# -*- coding:utf-8 -*-
+
 import serial
 import os
 import subprocess
 import sys
+import curses
 
 \end{lstlisting}
 
-o trecho \lstinline [basicstyle=\ttfamily,language=Python]{#!/usr/bin/python} é muito comum é scripts em ambiente Linux. Quando colocados na primeira linha, este trecho possibilita que ao darmos direitos de execução ao script ( torna-lo executável), ele irá procurar pelo binario, em \textit{/usr/bin/python} no caso, para ser executado. Essa linha nos permite não ter que dar o trabalho de invocar o programa python, já que o script se encarregaria disto.
+o trecho \lstinline [basicstyle=\ttfamily,language=Python]{#!/usr/bin/python} é muito comum é scripts em ambiente Linux. Quando colocados na primeira linha, este trecho possibilita que ao darmos direitos de execução ao script ( torna-lo executável), ele irá procurar pelo binario, em \textit{/usr/bin/python} no caso, para ser executado. Essa linha nos permite não ter que dar o trabalho de invocar o programa python, já que o script se encarregaria disto. A linha  \lstinline [basicstyle=\ttfamily,language=Python]{# -*- coding:utf-8 -*-} por outro lado permite que palavras com acentuação sejam inseridas no programa sem que haja falha de codificação. Devido aos avisos e interação com o usuário estarem todos em português, é interessante a inserção desta linha para uma maior compreensão e qualidade do programa.
 
 Em seguida, devemos tentar abrir a porta na qual desejamos escutar. Para uma maior portabilidade do código, o programa foi montado de forma que o parâmetro enviado junto com a inicialização do script seria o endereço desejado, como pode-se ver logo abaixo:
 
@@ -170,10 +173,17 @@ except IndexError:
 		com o parametro!"
 	sys.exit(0)
 
-f=file('./saida.txt','w')
-
+if ser.isOpen() & ser.readable():
+	f=file('./saida.txt','w')
+	fx=file('./trabalhada.dot','w')
+	fx.write("(0,0) " )
+	print "Porta aberta!"
+else:
+	print "Porta nao acessivel"
+	sys.exit(0)
+	
 \end{lstlisting}
-Com um conhecimento básico em orientação à objetos, conseguimos ver o quanto Python é intuitivo. Observe que o programa esta atrelado a uma velocidade de comunicação de 9600, assim como o código do arduino foi feito, na sessão \ref{making_arduino}.
+Com um conhecimento básico em orientação à objetos, conseguimos ver o quanto Python é intuitivo. Observe que o programa esta atrelado a uma velocidade de comunicação de 9600, assim como o código do Arduíno foi feito, na sessão \ref{making_arduino}. Logo em seguida é feito um simples tratamento de erro para verificar se a porta encontra-se aberta e disponível para leitura.
 
 \subsection{Lendo os dados}\label{reading}
 
@@ -185,18 +195,37 @@ Assim como em C, podemos trabalhar com interrupções do sistemas em Python. O q
 \begin{lstlisting}[basicstyle=\ttfamily,language=Python,numbers=none,caption={[Lendo dados]Lendo dados ininterruptamente}]
 
 print "Aperte Ctrl+C para terminar a leitura\n\n"
+
 while True:
 	try:
 		msg = ser.readline()
-		print msg 
+		print  msg,
+		stdscr.refresh()
 	except KeyboardInterrupt:
-		print "\rFim da leitura!"
 		break	
 	finally:
-		f.write(msg)
-		ser.close()
+		try:
+			f.write(msg)
+			vsel = eval(msg.split(" ")[0])/10.0
+			fx.write("-- (%.2f,%.2f) " % (vsel,  eval(msg.split(" ")[1])/100.0  ) )
+		except:
+			try:
+				if len(msg) > 1:
+					print "\rFalha na sincronização!\nFoi capturado contudo inválido \n" + msg 
+			except:
+				print "\rNão foi capturado nada!"
+			ser.close()
+			f.close()
+			fx.close()
+			sys.exit(0)
+
+
+print "\r   \nFim da leitura!"
+ser.close()
 
 \end{lstlisting}
+
+Indo além de capturar exceções apenas para a interrupção do teclado, também foi feito uma verificação do conteúdo capturado. Assim garante que o conteúdo que será plotado esta na formatação desejada e não possui nenhum carácter invalido.
 
 \subsection{Plotando os dados}\label{plotting}
 
@@ -217,4 +246,8 @@ proc.stdin.write("quit\n")
 \end{lstlisting}
 
 Com isso, teremos ao final do script um gráfico plotado na tela com os valores coletados pela porta serial. No apêndice \ref{src} pode-se observar na integra este código no Listing
-\ref{main_py}, onde haverá a inclusão de alguns  comentários no código e interação com o usuário.
+\ref{main_py}, onde haverá a inclusão de alguns  comentários no código e interação com o usuário. No programa final, parte do conteúdo impresso na tela é feito através da biblioteca curses, com o objetivo de tornar o programa mais intuitivo para o usuário e ter maior controle do fluxo de saída do programa. Assim sendo, muitos dos trechos citados nesta sessão, terão em sua versão final, em Listing \ref{main_py}, o uso do método
+\lstinline [basicstyle=\ttfamily,language=Python]{stdscr.addstr} para escrita na tela, no local de \lstinline [basicstyle=\ttfamily,language=Python]{print}.
+
+
+
