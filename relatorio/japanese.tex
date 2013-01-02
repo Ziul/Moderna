@@ -1,0 +1,35 @@
+\usepackage[encapsulated]{CJK}%
+%\usepackage{CJKutf8}  
+%\usepackage[romanian,english,brazil]{babel}  
+%\usepackage[overlap, CJK]{ruby}  
+%\usepackage{CJKulem}  
+%\renewcommand{\rubysep}{-0.2ex}  
+\newenvironment{Jap}{%  
+\CJKfamily{min}%  
+\CJKencfamily{JIS}{song}%
+\CJKtilde%  
+\CJKnospace%
+}{}% 
+
+%\newenvironment{jap}
+%{\begin{CJK}{UTF8}}
+%
+%{\end{CJK}}
+
+%\usepackage[overlap, CJK]{ruby}
+%\CJKencfamily{JIS}{song}
+\CJKfamily{min}
+%\CJKtilde
+%\CJKnospace
+%\renewcommand{\rubysep}{-0.3ex}
+
+\newenvironment{japo}
+{\begin{CJK}{UTF8}.\begin{Jap}}
+{\end{Jap}\end{CJK}}
+
+
+%{\begin{CJK}{UTF8}{}}
+%{\begin{Japanese}}
+%{\item[\hskip \labelsep {\bfseries #1}]}
+%{\end{Japanese}}
+%{\end{CJK}}}
