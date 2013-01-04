@@ -1,7 +1,7 @@
 # É só escrever o comando "make". Entro com "make clean" para limpar a sujeira e
 # "make buildclean" para deletar o pdf
 
-all: optimize
+all: clean optimize
 
 do: *.tex
 	if test -f *.bib ;\
