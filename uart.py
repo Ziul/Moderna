@@ -40,6 +40,9 @@ else:
 	print "Porta não acessível"
 	sys.exit(0)
 
+vsel=0
+l_vsel=1
+teste=True
 #limpa tela e buffer
 #os.system('clear')
 ser.flushInput()
@@ -49,32 +52,51 @@ curses.noecho()
 
 #print "Aperte Ctrl+C para terminar a leitura\n\n"
 stdscr.addstr (0,0,"Aperte Ctrl+C para terminar a leitura\n\n",curses.A_BOLD)
-while True:
+stdscr.addstr (1,0,"!")
+while teste:
 	try:
 		msg = ser.readline()
 		#print  msg,
 		stdscr.addstr (3,0,msg,curses.A_REVERSE)
 		stdscr.refresh()
 	except KeyboardInterrupt:
+		teste=False
 		break	
 	
 	finally:
 		try:
 			f.write(msg)
+			if (l_vsel == eval(msg.split(" ")[0]) ):
+				l_vsel=l_vsel+1
+			else:
+				raise
 			vsel = eval(msg.split(" ")[0])/10.0
 			fx.write("-- (%.2f,%.2f) " % (vsel,  eval(msg.split(" ")[1])/100.0  ) )
+			if (vsel > 5):
+				stdscr.addstr (1,0,"  ")
+			else:
+				stdscr.addstr (1,0,"!")
+			stdscr.refresh()
 		except:
-			curses.nocbreak(); stdscr.keypad(0); curses.echo()
-			curses.endwin()
+#			curses.nocbreak(); stdscr.keypad(0); curses.echo()
+#			curses.endwin()
+			ser.close()
+			ser.open()
+			f=open('./saida.txt','w')
+			fx=open('./trabalhada.txt','w')
 			try:
 				if len(msg) > 1:
-					print "\rFalha na sincronização!\nFoi capturado contudo inválido \n" + msg 
+#					print "\rFalha na sincronização!\n\rFoi capturado contudo inválido \t" + msg
+					stdscr.addstr (1,0,"!")
+#					stdscr.refresh()
 			except:
 				print "\rNão foi capturado nada!"
-			ser.close()
-			f.close()
-			fx.close()
-			sys.exit(0)
+				curses.nocbreak(); stdscr.keypad(0); curses.echo()
+				curses.endwin()
+				ser.close()
+				f.close()
+				fx.close()
+				sys.exit(0)			
 
 
 stdscr.addstr (5,0, "\r   \nFim da leitura!")
