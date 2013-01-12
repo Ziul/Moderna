@@ -45,7 +45,7 @@ Com o experimento feito por Thomas Young percebemos propriedades de onda na luz,
 	\foreach \A in {0,0.1,0.2,0.3,0.4,0.5} {
 		\draw[thick] (-0.8 + \A,2) -- (-0.8 + \A,3) ;
 	}
-	\node[black,scale=0.8] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
+	\node[black,scale=0.4] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
 	% ondas após a fenda
 	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4} {
 		\draw[thick,color=red] (0.02+\A,2-\A) -- (0.02+\A,2.01-\A) arc (-85:85:0.3+\A) ;
@@ -171,7 +171,7 @@ Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de
 	\node[black,scale=0.8] at (0.4,1.8) {$e⁻$};
 	\node[black,scale=0.8] at (0.6,1.8) {$e⁻$};
 	\node[black,scale=0.8] at (0.8,1.8) {$e⁻$};
-	\node[black,scale=0.8] at (1.0,1.8) {$e⁻$};
+	
 	\node[black,scale=0.8] at (1.2,1.8) {$e⁻$};
 	\node[black,scale=0.8] at (1.4,1.8) {$e⁻$};
 	\node[black,scale=0.8] at (1.6,1.8) {$e⁻$};
@@ -202,8 +202,8 @@ A energia cinética do elétron emitido tem que depender de alguma coisa. Foi de
     grid=major,
     axis lines=middle,
     inner axis line style={->},
-    xlabel={$x$ Energia Cinética},
-    ylabel={$y$ Frequência},
+    xlabel={$x$ Frequência},
+    ylabel={$y$ Energia Cinética},
     yticklabel={ , , },
     xticklabel={ , , },
     ymin=-10,
@@ -216,6 +216,7 @@ A energia cinética do elétron emitido tem que depender de alguma coisa. Foi de
             (500, 340)
         };
 \end{axis}
+\node[black,scale=1] at (1.3,-0.3) {$f_0$};
 \end{tikzpicture}
 \end{center}
 \caption{Gráfico Energia cinética vs. Frequência}
