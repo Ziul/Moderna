@@ -187,3 +187,37 @@ Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de
 \caption{Efeito fotoelétrico}
 \label{fotoeletrico}
 \end{figure}
+
+Uma característica importante deste trabalho é que o eletron é emitido a partir do metal com uma energia cinética específica (isto é, uma velocidade específica). Agora qualquer um que esteja familiarizado com o comportamento das ondas sabe que a energia associada com uma onda está relacionada com a sua amplitude ou intensidade. Assim, todos os que pensavam que a luz é apenas uma onda estavam realmente confusos quando a intensidade da luz foi aumentada (luz brilhante) e a energia cinética do elétron emitido não mudou. O que acontece é que, ao aumentar o brilho da luz mais elétrons são emitidos, mas todos têm a mesma energia cinética.
+
+A energia cinética do elétron emitido tem que depender de alguma coisa. Foi descoberto então que variar a frequência da luz modifica a energia cinética do eletron emitido.
+
+\pgfplotsset{width=8cm,compat=newest}
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    scale only axis,
+    grid=major,
+    axis lines=middle,
+    inner axis line style={->},
+    xlabel={$x$ Energia Cinética},
+    ylabel={$y$ Frequência},
+    yticklabel={ , , },
+    xticklabel={ , , },
+    ymin=-10,
+    ymax=370,
+    xmin=-10,
+    xmax=520,
+]
+\addplot[color=red,thick] coordinates {
+            (75, 0)
+            (500, 340)
+        };
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\caption{Gráfico Energia cinética vs. Frequência}
+\label{kinect_freq}
+\end{figure}
