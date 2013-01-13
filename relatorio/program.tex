@@ -19,16 +19,6 @@ user@DESKTOP: sudo apt-get install arduino
 
 Desta forma, podemos acessar a IDE do Arduíno, que pode ser observada na figura \ref{arduino_ide} e escrever o programa tranquilamente, utilizando apenas as funções $loop$ e $setup$.
 
-\end{multicols}
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.25,angle=0,keepaspectratio=true]{./fts/arduino_ide.png}
-\end{center}
-\caption{IDE do Arduino}
-\label{arduino_ide}
-\end{figure}
-\begin{multicols}{2}    % 2 columns
-
 \subsubsection{Utilizando o Eclipse para o Arduino}\label{eclipse}
 
 Porém há alguns grandes inconvenientes ao utilizar a IDE do Arduino.
@@ -38,6 +28,7 @@ Porém há alguns grandes inconvenientes ao utilizar a IDE do Arduino.
 	\item O editor de texto deixa muito a desejar
 	\item Não há uma função de auto-completar para facilitar o uso das funções já criadas
 \end{itemize}
+
 
 Desta forma, uma opção interessante é utilizar o Eclipse para programar o Arduíno. Isso requer alguns conceitos mais avançados de programação que não serão descritos neste relatório, que são eles:
 
@@ -49,9 +40,20 @@ Desta forma, uma opção interessante é utilizar o Eclipse para programar o Ard
 	\item Instalação do plugin de AVR e do AVRDude no Eclipse.
 \end{itemize}
 
+
 Um passo a passo de como proceder com a configuração do Eclipse para uso do Arduíno pode ser observado em \cite{eclipse}.
 
 Outro fator interessante de se usar o Eclipse é a necessidade de fazer uma função $main$, já que esta é descartada pela IDE do Arduíno. Abaixo segue um exemplo de como a função $main$ poderia ser escrita para ter um funcionamento semelhante ao da IDE do Arduíno, facilitando assim a compatibilidade entre os códigos.
+
+\end{multicols}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25,angle=0,keepaspectratio=true]{./fts/arduino_ide.png}
+\end{center}
+\caption{IDE do Arduino}
+\label{arduino_ide}
+\end{figure}
+\begin{multicols}{2}    % 2 columns
 
 %\end{multicols}
 \begin{lstlisting}[basicstyle=\ttfamily,numbers=none,caption={[Exemplo da função main()]Código de exemplo da função main()}]
@@ -71,6 +73,7 @@ int main(void)
 }
 \end{lstlisting}
 %\begin{multicols}{2}    % 2 columns
+
 
 Observe que este código mantem toda a estrutura básica do Arduíno, assim como a inclusão do header $Arduino.h$, necessário para a inclusão das rotinas básicas do Arduíno, assim como sua configuração.
 

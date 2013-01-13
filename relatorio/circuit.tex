@@ -106,3 +106,80 @@ Observe que este circuito permite a leitura de dados de forma distinta. Caso o p
 \caption{Circuito proposto do LDR}
 \label{final}
 \end{figure}
+
+\section{Construindo as fendas}\label{fendas}
+
+Para a realização do experimento, era necessário a construção de duas fendas. A primeira tinha como objetivo ser uma simples lacuna entre duas laminas. Porém a segunda fenda regia a necessidade de haver um objeto suficientemente fino entre as duas laminas, com o  objetivo de dividi-la em duas fendas.
+
+\subsection{Fenda Simples}\label{fed_simples}
+
+A obtenção da fenda simples não apresentava grandes dificuldades, tudo o que precisávamos era seguir o modelo descrito na figura \ref{fenda_simples}. Na construção deste ponto do trabalho, utilizamos laminas de barbear como sendo as chapas, e uma lamina extra foi utilizada para garantir uma distancia controlada entre as duas chapas, tendo assim $ \lambda = 0.06mm \pm 0.05mm$.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=1]
+%  \draw[decorate,style=help lines] (-2,-2) grid[step=1cm] (4,4);
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,0.9)   rectangle (5.5,0.5); % barra de baixo
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,4.4)   rectangle (5.5,4.1); % barra de cima
+	\draw[decorate,thick,fill=yellow] (0,0) -- (0,5) -- (2,5) -- (2,0) -- (0,0); % primeira chapa
+	\draw[decorate,thick,fill=yellow] (3,0) -- (3,5) -- (5,5) -- (5,0) -- (3,0); % segudna chapa
+%	\draw[decorate,thick,fill=red] (2.4,0) -- (2.4,5) -- (2.6,5) -- (2.6,0) -- (2.4,0); % arame
+	\draw[decorate,|-|] (2,-0.3cm) -- (3,-0.3cm); % distancia da primeira fenda
+%	\draw[decorate,|-|] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+%	\draw[decorate,|-|,dashed] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+	% notas
+	\node[black,scale=0.6] at (1,2.5) {Chapa 1};
+	\node[black,scale=0.6] at (4,2.5) {Chapa 2};
+%	\node[black,scale=0.6] at (2.5,5.2) {Arame};
+	\node[black,scale=0.6] at (-1cm,1.1) {Barra de fixação};
+	\node[black,scale=0.6] at (-1cm,3.9) {Barra de fixação};
+	\node[black,scale=0.8] at (2.5,-0.5cm) {$\lambda$};
+%	\node[black,scale=0.8] at (2.85,-0.5cm) {$\lambda$};
+\end{tikzpicture}
+\end{center}
+\caption{Fenda simples}
+\label{fenda_simples}
+\end{figure}
+
+\subsection{Fenda Dupla}\label{fed_dupla}
+
+Para a construção da fenda dupla, foi necessário a inserção de um fio de cobre entre as duas laminas de aço. Devido ao fato do fio ser mair grosso que a própria fenda simples, foi necessário a utilização de outra lamina para uma nova distancia entre as duas chapas, produzindo assim uma fenda semelhante ao modelo descrito na figura \ref{fenda_dupla}, onde $ \lambda_1=\lambda_2 = 0.06mm \pm 0.05mm$.
+
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=1]
+%  \draw[decorate,style=help lines] (-2,-2) grid[step=1cm] (4,4);
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,0.9)   rectangle (5.5,0.5); % barra de baixo
+	\draw[decorate,thick,pattern=north east lines] (-0.5cm,4.4)   rectangle (5.5,4.1); % barra de cima
+	\draw[decorate,thick,fill=yellow] (0,0) -- (0,5) -- (2,5) -- (2,0) -- (0,0); % primeira chapa
+	\draw[decorate,thick,fill=yellow] (3,0) -- (3,5) -- (5,5) -- (5,0) -- (3,0); % segudna chapa
+	\draw[decorate,thick,fill=red] (2.4,0) -- (2.4,5) -- (2.6,5) -- (2.6,0) -- (2.4,0); % arame
+	\draw[decorate,|-|] (2,-0.3cm) -- (2.3,-0.3cm); % distancia da primeira fenda
+	\draw[decorate,|-|] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+%	\draw[decorate,|-|,dashed] (2.7,-0.3cm) -- (3,-0.3cm); % distancia da segunda fenda
+	% notas
+	\node[black,scale=0.6] at (1,2.5) {Chapa 1};
+	\node[black,scale=0.6] at (4,2.5) {Chapa 2};
+	\node[black,scale=0.6] at (2.5,5.2) {Arame};
+	\node[black,scale=0.6] at (-1cm,1.1) {Barra de fixação};
+	\node[black,scale=0.6] at (-1cm,3.9) {Barra de fixação};
+	\node[black,scale=0.8] at (2.15,-0.5cm) {$\lambda_1$};
+	\node[black,scale=0.8] at (2.85,-0.5cm) {$\lambda_2$};
+\end{tikzpicture}
+\end{center}
+\caption{Fenda dupla}
+\label{fenda_dupla}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+

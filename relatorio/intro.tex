@@ -21,7 +21,7 @@ Com o experimento feito por Thomas Young percebemos propriedades de onda na luz,
 	\foreach \A in {0,0.1,0.2,0.3,0.4,0.5} {
 		\draw[thick] (-0.8 + \A,2) -- (-0.8 + \A,3) ;
 	}
-	\node[black,scale=0.8] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
+	\node[black,scale=0.4] at (-0.6,1.8) {$\overbrace{\text{Ondas incidentes}}$};
 	% ondas após a fenda
 	\foreach \A in {0,0.2,0.4,0.6,0.8,1,1.2,1.4} {
 		\draw[thick] (0.2+\A,2.0-\A) -- (0.2+\A,2.01-\A) arc (-70:70:0.5+\A) ;
@@ -192,31 +192,46 @@ Uma característica importante deste trabalho é que o eletron é emitido a part
 
 A energia cinética do elétron emitido tem que depender de alguma coisa. Foi descoberto então que variar a frequência da luz modifica a energia cinética do eletron emitido.
 
-\pgfplotsset{width=8cm,compat=newest}
+%\pgfplotsset{width=8cm,compat=newest}
+%
+%\begin{figure}[H]
+%\begin{center}
+%\begin{tikzpicture}
+%\begin{axis}[
+%    scale only axis,
+%    grid=major,
+%    axis lines=middle,
+%    inner axis line style={->},
+%    xlabel={$x$ Frequência},
+%    ylabel={$y$ Energia Cinética},
+%    yticklabel={ , , },
+%    xticklabel={ , , },
+%    ymin=-10,
+%    ymax=370,
+%    xmin=-10,
+%    xmax=520,
+%]
+%\addplot[color=red,thick] coordinates {
+%            (75, 0)
+%            (500, 340)
+%        };
+%\end{axis}
+%\node[black,scale=1] at (1.3,-0.3) {$f_0$};
+%\end{tikzpicture}
+%\end{center}
+%\caption{Gráfico Energia cinética vs. Frequência}
+%\label{kinect_freq}
+%\end{figure}
 
 \begin{figure}[H]
 \begin{center}
-\begin{tikzpicture}
-\begin{axis}[
-    scale only axis,
-    grid=major,
-    axis lines=middle,
-    inner axis line style={->},
-    xlabel={$x$ Frequência},
-    ylabel={$y$ Energia Cinética},
-    yticklabel={ , , },
-    xticklabel={ , , },
-    ymin=-10,
-    ymax=370,
-    xmin=-10,
-    xmax=520,
-]
-\addplot[color=red,thick] coordinates {
-            (75, 0)
-            (500, 340)
-        };
-\end{axis}
-\node[black,scale=1] at (1.3,-0.3) {$f_0$};
+\begin{tikzpicture}[scale=1]
+	\draw[very thin,color=cyan] (-0.1,-0.1) grid (4.9,4.9);
+
+	\draw[->] (-0.2,0) -- (5,0) node[below left] {$x-$Frequência};
+	\draw[->] (0,-0.2) -- (0,5) node[above right] {$f(x)-$Energia Cinética};
+	\draw[color=red,mark=x,smooth] (0,0) -- (1,0) -- (4.7,3.7) ;
+
 \end{tikzpicture}
 \end{center}
 \caption{Gráfico Energia cinética vs. Frequência}

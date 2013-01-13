@@ -90,4 +90,11 @@ configure:
 	rm -rv search.temp
 #	grep '^%' *.tex
 	
+fast: *.tex
+	pdflatex main
+	pdfopt main.pdf $(notdir $(PWD)).pdf
+	make clean
+	rm -rf main.pdf
+	
+	
 .SILENT:
