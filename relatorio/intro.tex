@@ -1,4 +1,5 @@
 \section{Introdução}\label{intro}
+Esse relatório descreve a reprodução do experimento de Thomas Young proposta para a disciplina de Física Moderna da Faculdade UnB-Gama. Visa assim mostrar propriedades de onda que a luz possui, e colher dados experimentais para análise, sendo realizado da seguinte forma: Confecção de fendas para difração, confecção do circuito que possibilita utilizar um sensor (LDR), leitura do sensor para um microcontrolador e em seguida leitura e tratamento dos dados na porta serial do computador.
 
 Se a luz consistisse estritamente de  partículas  normais ou clássicas, e estas partículas fossem disparadas em linha reta através de uma fenda e deixa-se chegar a uma superfície, do outro lado, seria de esperar um padrão correspondente ao tamanho e à forma da fenda. No entanto, quando esta "experiência de única fenda" é efectivamente realizado, o padrão na superfície (parede) é um padrão de difração em que a luz se espalha. Quanto menor a fenda, maior o angulo de dissipação.
 
@@ -83,7 +84,7 @@ Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de
 \begin{tikzpicture}[decoration=penciline, decorate,scale=1]
 	\draw[thick] (0,0) -- (0,2) ; % lado esquerdo
 	\draw[thick] (0,2) -- (2,2) ; % lado superior
-	\draw[thick] (2,2) -- (2,0) ; % lado esquerdo
+	\draw[thick] (2,2) -- (2,0) ; % lado direto
 	\draw[thick] (2,0) -- (0,0) ; % lado inferior
 	\draw[thick,->] (0,5) -- (1,2) ; % colisão luz
 	\node[black,scale=0.8] at (0,5.2) {light};
@@ -237,3 +238,21 @@ A energia cinética do elétron emitido tem que depender de alguma coisa. Foi de
 \caption{Gráfico Energia cinética vs. Frequência}
 \label{kinect_freq}
 \end{figure}
+
+No entanto, existe uma frequência crítica para cada metal, $f_0$, abaixo da qual não são emitidos eletrons. Isto mostra que a energia cinética é igual à frequência luz multiplicada por uma constante (isto é, o declive da linha) Essa constante é chamada constante de Plank e é dada pelo símbolo h.
+
+\begin{equation}\label{const_plank}
+	h= 6.63\cdot 10^-34 J\cdot s 
+\end{equation}
+
+Assim é possível escrever uma equação para a energia cinética do eletron emitido.
+
+\begin{equation}
+	E_c= h\cdot f - h\cdot f_0
+\end{equation}
+
+Este resultado não é consistente com a teoria da luz como uma onda. Uma explicação que é consistente com essa imagem é que a luz vem em pacotes discretos, chamados fótons, e cada fóton deve ter energia suficiente para ejetar um único elétron. Caso contrário, nada acontece. Assim, a energia de um único foton é:
+
+\begin{equation}
+	E_f=hf
+\end{equation}
