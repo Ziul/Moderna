@@ -1,11 +1,54 @@
-\section{Resultados}\label{result}
+\section{Resultados e Deduções}\label{result}
 
 Para a verificação dos resultados, são necessárias, em suma, duas preocupações principais. A primeira é de interpretação da teoria quantica da luz, e perceber seu comportamento de onda. A segunda é a verificação prática do comprimento de onda do laser utilizado, por meio das medidas e dados coletados. Se o comprimento de onda corresponder com a cor de laser usado no experimento, o experimento passa a ter um resultado positivo.
 
 \subsection{Fenda Simples}\label{fenda_simples}
+
+Na fenda simples verificamos, sem partir para medições, que a luz do laser difrata ao passar pela fenda que tem expessura menor que seu diâmetro. Isso já indica de cara um comportamento de onda para a luz. Também verificamos uma padrão em que se repetem pontos claros e escuros, totalmente simétricos, e com ponto mais claro no centro, passando a perder intensidade ao chegar para as extremidades. A propagação das ondas para a área de sombra pode ser explicada por considerar pequenos elementos da frente de onda na fenda e tratá-los como fontes pontuais. Dessa forma, os raios dessas fontes pontuais passam a sofrer interferencia uns dos outros.
+
+Uma das características da difracção da fenda simples é que uma fenda estreita irá dar um padrão de difracção mais amplo, o que parece um pouco contra-intuitivo. Uma forma de visualização é de considerar que os raios da extremidade devem atingir meio comprimento de onda ($\frac{\lambda}{2}$) de diferença no comprimento da tragetória da luz, e, se a fenda é mais estreita, vai demorar um ângulo maior para os os raios alcançarem essa diferença.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=1]
+	\draw[thick] (0,0) -- (0,2.4) ; % barra de baixo
+	\draw[thick] (0,2.6) -- (0,5) ; % barra de cima
+	\draw[thick] (5,0) -- (5,5) ; 	% parede
+	%padrão deluz na parede
+	\draw[thick,color=red,fill=red] (5.2,2.5) ellipse (0.05 and 0.4);
+	\draw[thick,color=red,fill=red] (5.2,3.3) ellipse (0.05 and 0.3);
+	\draw[thick,color=red,fill=red] (5.2,1.7) ellipse (0.05 and 0.3);
+	\draw[thick,color=red,fill=red] (5.2,4.05) ellipse (0.05 and 0.2);
+	\draw[thick,color=red,fill=red] (5.2,0.95) ellipse (0.05 and 0.2);
+	%diametro da fresta
+	\draw[thick] (-0.2,2.4) -- (-0.2,2.6) ; 
+	\draw[thick] (-0.3,2.6) -- (-0.1,2.6) ;
+	\draw[thick] (-0.3,2.4) -- (-0.1,2.4) ;
+	\node[black,scale=1] at (-0.45,2.44) {$a$};
+	%distancia entre fenda e parede
+	\draw[dashed]  (0.0,-0.3) -- (5.0,-0.3) ;
+	\draw[thick]  (0.0,-0.2) -- (0.0,-0.4) ;	
+	\draw[thick]  (5.0,-0.2) -- (5.0,-0.4) ;	
+	\node[black,scale=1] at (2.5,-0.6) {$D$};
+	%distancia y
+	\draw[dashed]  (4.8,2.5) -- (4.8,3.75) ;
+	\draw[thick]  (4.7,2.5) -- (4.9,2.5) ;
+	\draw[thick]  (4.7,3.75) -- (4.9,3.75) ;
+	\node[black,scale=1] at (4.58,3.125) {$y$};
+	%mostra do angulo
+	\draw[dashed]  (0,2.5) -- (5,3.75) ;
+	\draw[dashed]  (0,2.5) -- (2.5,2.5) ;
+	\node[black,scale=1] at (1.3,2.66) {$\theta$};
+\end{tikzpicture}
+\end{center}
+\caption{Difração em fenda simples}
+\label{diff_simples}
+\end{figure}
+
 \begin{equation}
 	\lambda \approx \frac{ya}{mD}
 \end{equation}
+
 Sendo $a$ o diâmetro da fenda, $m$ a quantidade de pontos escuros a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
 
 %soh esqueleto pra continuar dps
