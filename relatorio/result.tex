@@ -8,6 +8,25 @@ Na fenda simples verificamos, sem partir para medições, que a luz do laser dif
 
 Uma das características da difracção da fenda simples é que uma fenda estreita irá dar um padrão de difracção mais amplo, o que parece um pouco contra-intuitivo. Uma forma de visualização é de considerar que os raios da extremidade devem atingir meio comprimento de onda ($\frac{\lambda}{2}$) de diferença no comprimento da tragetória da luz, e, se a fenda é mais estreita, vai demorar um ângulo maior para os os raios alcançarem essa diferença.
 
+Para chegar à equação que ajudará a achar o comprimento de onda do laser utilizado em função das medidas encontradas ao fazer o experimento, e então comparar esse comprimento de onda ao intervalo que faz sentido pra cor de laser que foi usado, temos que primeiramente fazer algumas aproximações.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[decoration=penciline, decorate,scale=1]
+	\draw[thick] (0,0) -- (0,0.9) ; % barra de baixo
+	\draw[thick] (0,1.1) -- (0,2) ; % barra de cima
+	% ondas primarias
+	\foreach \A in {0,0.1,0.2,0.3,0.4,0.5} {
+		\draw[thick] (-0.8 + \A,0.5) -- (-0.8 + \A,1.5) ;
+	}
+\end{tikzpicture}
+\end{center}
+\caption{Frentes planas e paralelas}
+\label{frentes}
+\end{figure}
+
+Prieiro é necessário considerar que a luz do laser está vindo de uma fonte infinitamente distante, para considerar frentes de onda planas e paralelas entre si. Isso garante que os elementos de amplitude estejam em fase.
+
 \begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}[decoration=penciline, decorate,scale=1]
@@ -44,6 +63,8 @@ Uma das características da difracção da fenda simples é que uma fenda estrei
 \caption{Difração em fenda simples}
 \label{diff_simples}
 \end{figure}
+
+Em seguida considerando que $\tan \theta =\frac{y}{D}$, podemos considerar que $D>>a$ (em algumas das nossas medições $D$ teve quase 9 metros, sendo que em uma delas teve quase 30, e a fenda sempre teve poucos milimetros), e assim podemos fazer aproximações $\tan\theta \approx \sin \theta \approx \theta \approx \frac{y}{D}$. Considerando então que $a \sin \theta =m\lambda$, então $a\frac{y}{D} =m\lambda$ e por fim:
 
 \begin{equation}
 	\lambda \approx \frac{ya}{mD}
