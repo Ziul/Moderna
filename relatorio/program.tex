@@ -173,7 +173,7 @@ try:
 	ser.open()
 except IndexError:
 	print "Passe uma porta existente 
-		com o parametro!"
+		como parametro!"
 	sys.exit(0)
 
 if ser.isOpen() & ser.readable():
@@ -182,7 +182,7 @@ if ser.isOpen() & ser.readable():
 	fx.write("(0,0) " )
 	print "Porta aberta!"
 else:
-	print "Porta nao acessivel"
+	print "Porta não acessível"
 	sys.exit(0)
 	
 \end{lstlisting}
@@ -244,12 +244,17 @@ proc = subprocess.Popen(['gnuplot','-p'],
                         
 proc.stdin.write("plot 'saida.txt' with lines\n")
 proc.stdin.write("pause mouse\n")
+proc.stdin.write("set table\n")
+proc.stdin.write("set output \"graph.table\" \n")
+proc.stdin.write("set format \"%.5f\"\n")
+proc.stdin.write("plot 'saida.txt'\n")
 proc.stdin.write("quit\n")
 
 \end{lstlisting}
 
-Com isso, teremos ao final do script um gráfico plotado na tela com os valores coletados pela porta serial. No apêndice \ref{src} pode-se observar na integra este código no Listing
-\ref{main_py}, onde haverá a inclusão de alguns  comentários no código e interação com o usuário. No programa final, parte do conteúdo impresso na tela é feito através da biblioteca curses, com o objetivo de tornar o programa mais intuitivo para o usuário e ter maior controle do fluxo de saída do programa. Assim sendo, muitos dos trechos citados nesta sessão, terão em sua versão final, em Listing \ref{main_py}, o uso do método
+Com isso, teremos ao final do script um gráfico plotado na tela com os valores coletados pela porta serial. Para titulo de maior comodidade na produção deste relatório, o grupo foi um pouco além de apenas plotar o gráfico na tela, e pedimos a exportação dos dados coletados pelo  gnuplot para o modelo \textit{*.table}. A vantagem de exportar esta saída é por que ela pode importada pelo pacote \textit{Tikz}, plotando o gráfico diretamente dos dados capturados de forma vetorizada e nativa no pdf,o que garante uma melhor visualização para o leitor. Mais instruções de como proceder com esta inclusão podem ser vistos em \cite{table}.
+
+No apêndice \ref{src} pode-se observar na integra este código no Listing \ref{main_py}, onde haverá a inclusão de alguns  comentários no código e interação com o usuário. No programa final, parte do conteúdo impresso na tela é feito através da biblioteca curses, com o objetivo de tornar o programa mais intuitivo para o usuário e ter maior controle do fluxo de saída do programa. Assim sendo, muitos dos trechos citados nesta sessão, terão em sua versão final, em Listing \ref{main_py}, o uso do método
 \lstinline [basicstyle=\ttfamily,language=Python]{stdscr.addstr} para escrita na tela, no local de \lstinline [basicstyle=\ttfamily,language=Python]{print}.
 
 
