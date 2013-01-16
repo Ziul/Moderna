@@ -78,8 +78,6 @@ while teste:
 				stdscr.addstr (1,0,"!")
 			stdscr.refresh()
 		except:
-#			curses.nocbreak(); stdscr.keypad(0); curses.echo()
-#			curses.endwin()
 			ser.close()
 			ser.open()
 			f=open('./saida.txt','w')
@@ -117,18 +115,22 @@ proc = subprocess.Popen(['gnuplot','-p'],
 proc.stdin.write("set yrange [-1:1300]\n")
 proc.stdin.write("plot 'saida.txt' with lines\n")
 proc.stdin.write("pause mouse\n")
+
 stdscr.addstr (8,0, " Clique na figura para fecha-la ",curses.A_BOLD)
 stdscr.addstr (25,25, " ")
 stdscr.refresh()
 
-proc.stdin.write("set terminal latex\n")
-proc.stdin.write("unset key\n")
-proc.stdin.write("set output \"graph.tex\" \n")
-proc.stdin.write("plot 'saida.txt' with lines\n")
+#proc.stdin.write("set terminal latex\n")
+#proc.stdin.write("unset key\n")
+#proc.stdin.write("set output \"graph.tex\" \n")
+
+proc.stdin.write("set table\n")
+proc.stdin.write("set output \"graph.table\" \n")
+proc.stdin.write("set format \"%.5f\"\n")
+proc.stdin.write("plot 'saida.txt'\n")
 proc.stdin.write("quit\n")
 proc.wait()
 #proc.terminate()
-os.system('cp graph.tex ./relatorio/')
 
 stdscr.addstr (9,0, "\n\nGráfico gerado. \nSaindo\n")
 stdscr.refresh()
