@@ -27,6 +27,7 @@ Para chegar à equação que ajudará a achar o comprimento de onda do laser uti
 
 Prieiro é necessário considerar que a luz do laser está vindo de uma fonte infinitamente distante, para considerar frentes de onda planas e paralelas entre si. Isso garante que os elementos de amplitude estejam em fase.
 
+
 \begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}[decoration=penciline, decorate,scale=1]
@@ -64,15 +65,54 @@ Prieiro é necessário considerar que a luz do laser está vindo de uma fonte in
 \label{diff_simples}
 \end{figure}
 
+
+
 Em seguida considerando que $\tan \theta =\frac{y}{D}$, podemos considerar que $D>>a$ (em algumas das nossas medições $D$ teve quase 9 metros, sendo que em uma delas teve quase 30, e a fenda sempre teve poucos milimetros), e assim podemos fazer aproximações $\tan\theta \approx \sin \theta \approx \theta \approx \frac{y}{D}$. Considerando então que $a \sin \theta =m\lambda$, então $a\frac{y}{D} =m\lambda$ e por fim:
 
-\begin{equation}
+\begin{equation}\label{eq_simples}
 	\lambda \approx \frac{ya}{mD}
 \end{equation}
 
 Sendo $a$ o diâmetro da fenda, $m$ a quantidade de pontos escuros a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
 
-%soh esqueleto pra continuar dps
+\end{multicols}
+
+\vspace{2cm}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+%	\draw[very thin,color=gray] (-0.1,-0.1) grid (9*0.7+0.9,8*0.7+0.9);
+
+	\draw[->] (-0.2,0) -- (9*0.7+1,0) node[below left] {$x$};
+	\draw[->] (0,-0.2) -- (0,8*0.7+1) node[right] {$f(x)$};
+
+	\tikz \draw plot[smooth] file {./simples.table};
+\end{tikzpicture}
+\vspace{1.5cm}
+\\\hypertarget{diagrama}{Dados capturados - Fenda Simples}
+\end{center}
+
+\begin{multicols}{2}    % 2 columns
+
+Na figura acima vemos o padrão luminoso que capturamos para o laser verde. É um gráfico intensidade vs. tempo. Foram capturados 6 pontos escuros para cada lado, esses pontos simétricos ao centro. A distância do laser para a fenda (que não entra para os cálculos) foi de $17,16 mm$. A distancia $D$ da fenda até a parede (ponto de leitura) foi de $8,94m \pm 1cm$, e o percurso todo de leitura $2y$ foi de $115.23cm \pm 1cm$. Nossa fenda simples possui abertura de $0,05mm \pm 0,04mm$.
+
+Basta agora aplicarmos a equação aproximada para verificar se o comprimento de onda $\lambda$ corresponde a um intervalo coerente com a cor verde.
+
+\begin{align*}\label{calc_simples}
+\lambda & \approx \frac{ya}{mD}\\
+&\approx \frac{0,576\cdot 0,00005}{6 \cdot 8,94}\\
+&\approx 536.9127517\cdot 10^{-9}\\
+&\approx 536.9127517\cdot 10^{-9} \pm 446.1254589\cdot 10^{-9}
+\end{align*}
+
+
+
+É notável o erro imenso que foi carregado para o resultado final. Isso se deve aos instrumentos de medição não profissionais utilizados. Entretanto, os valores sem a consideração do erro batem com o esperado, tendo comprimento de onda $\lambda$ dentro do intervalo da cor verde $\lambda 500-565 nm$
+
+\begin{equation}\label{sinal}
+	I(\beta)=I_0 \frac{sin^2\beta}{\beta^2}
+\end{equation}
+Sendo $I_0$ o valor de intensidade máxima da luz observado no intervalo $\beta$, obtendo assim valores mínimos para $\beta=\pm n \pi$ e valores máximos relativos nas raízes de $\beta=tg(\beta)$.\cite{ondas}
+
 \subsection{Fenda Dupla}\label{fenda_dupla}
 \begin{equation}
 	\lambda \approx \frac{yd}{mD}
