@@ -73,11 +73,11 @@ Em seguida considerando que $\tan \theta =\frac{y}{D}$, podemos considerar que $
 	\lambda \approx \frac{ya}{mD}
 \end{equation}
 
-Sendo $a$ o diâmetro da fenda, $m$ a quantidade de pontos escuros a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
+Sendo $a$ o diâmetro da fenda, $m$ a quantidade de pontos claros (ou escuros, dependendo do método) a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
 
 \end{multicols}
 
-\vspace{2cm}
+\vspace{0.5cm}
 \begin{center}
 \begin{tikzpicture}[scale=1.5]
 %	\draw[very thin,color=gray] (-0.1,-0.1) grid (9*0.7+0.9,8*0.7+0.9);
@@ -93,7 +93,7 @@ Sendo $a$ o diâmetro da fenda, $m$ a quantidade de pontos escuros a partir do c
 
 \begin{multicols}{2}    % 2 columns
 
-Na figura acima vemos o padrão luminoso que capturamos para o laser verde. É um gráfico intensidade vs. tempo. Foram capturados 6 pontos escuros para cada lado, esses pontos simétricos ao centro. A distância do laser para a fenda (que não entra para os cálculos) foi de $17,16 mm$. A distancia $D$ da fenda até a parede (ponto de leitura) foi de $8,94m \pm 1cm$, e o percurso todo de leitura $2y$ foi de $115.23cm \pm 1cm$. Nossa fenda simples possui abertura de $0,05mm \pm 0,04mm$.
+Na figura acima vemos o padrão luminoso que capturamos para o laser verde. É um gráfico intensidade vs. posição. Foram capturados 6 pontos escuros e seis claros para cada lado, esses pontos simétricos ao centro. A distância do laser para a fenda (que não entra para os cálculos) foi de $17,16 mm$. A distancia $D$ da fenda até a parede (ponto de leitura) foi de $8,94m \pm 1cm$, e o percurso todo de leitura $2y$ foi de $115.23cm \pm 1cm$. Nossa fenda simples possui abertura de $0,05mm \pm 0,04mm$.
 
 Basta agora aplicarmos a equação aproximada para verificar se o comprimento de onda $\lambda$ corresponde a um intervalo coerente com a cor verde.
 
@@ -106,16 +106,48 @@ Basta agora aplicarmos a equação aproximada para verificar se o comprimento de
 
 
 
-É notável o erro imenso que foi carregado para o resultado final. Isso se deve aos instrumentos de medição não profissionais utilizados. Entretanto, os valores sem a consideração do erro batem com o esperado, tendo comprimento de onda $\lambda$ dentro do intervalo da cor verde $\lambda 500-565 nm$
+É notável o erro imenso que foi carregado para o resultado final. Isso se deve aos instrumentos de medição não profissionais utilizados. Entretanto, os valores sem a consideração do erro batem com o esperado, tendo comprimento de onda $\lambda$ dentro do intervalo da cor verde $\lambda ~500-565 nm$
 
-\begin{equation}\label{sinal}
-	I(\beta)=I_0 \frac{sin^2\beta}{\beta^2}
-\end{equation}
-Sendo $I_0$ o valor de intensidade máxima da luz observado no intervalo $\beta$, obtendo assim valores mínimos para $\beta=\pm n \pi$ e valores máximos relativos nas raízes de $\beta=tg(\beta)$.\cite{ondas}
 
 \subsection{Fenda Dupla}\label{fenda_dupla}
+
+A dedução da formula para achar o comprimento de onda com os dados da fenda dupla segue raciocínio parecido ao que foi usado para a simples.
+
 \begin{equation}
 	\lambda \approx \frac{yd}{mD}
 \end{equation}
-Sendo $d$ o diâmetro do conjunto fenda-fenda, $m$ a quantidade de pontos escuros a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
-%soh esqueleto pra continuar dps
+
+Sendo $d$ o diâmetro do conjunto fenda-fenda, $m$ a quantidade de pontos escuros (ou luminosos, dependendo do método) a partir do centro, $D$ a distância da fenda até o ponto de leitura, e $y$ a distância do centro luminoso até ultimo ponto de leitura.
+
+\end{multicols}
+
+\vspace{2cm}
+\begin{center}
+\begin{tikzpicture}[scale=1.5]
+%	\draw[very thin,color=gray] (-0.1,-0.1) grid (9*0.7+0.9,8*0.7+0.9);
+
+	\draw[->] (-0.2,0) -- (9*0.7+1,0) node[below left] {$x$};
+	\draw[->] (0,-0.2) -- (0,8*0.7+1) node[right] {$f(x)$};
+
+	\tikz \draw plot[smooth] file {./dupla.table};
+\end{tikzpicture}
+\vspace{1.5cm}
+\\\hypertarget{diagrama}{Dados capturados - Fenda Dupla}
+\end{center}
+
+\begin{multicols}{2}    % 2 columns
+
+Uma diferença que o padrão luminoso da fenda dupla devia apresentar é a de que seu gráfico deveria ser encapsulado pelo gráfico da fenda simples (o "pulso" central da fenda simples, tem diversos "pulsos" na fenda dupla).  O gráfico é obtido juntando-se a expressão de interferência para dupla-fenda com a expressão de difração da fenda simples. As fendas têm expessura teoricamente idênticas, cada uma das quais fornece a luz distribuída de acordo com a expressão de difração da fenda simples. A interferência da fenda dupla normalmente envolve menores dimensões espaciais e, portanto, produz faixas claras e escuras sobrepostas sobre o padrão de difração da fenda simples.
+
+Não obtivemos resultados muito satisfatórios vindos do nosso sensor, e isso se deve à falta de precisão do mesmo. Ao ser colocado em um ponto escuro ele acaba sendo influenciado pelas luminosidades adjacentes, o que atrapalhou na fenda simples de maneira menos significativa, já que os pontos escuros eram maiores, mas atrapalhou bastante na coleta de dados para a fenda dupla.
+
+Os cálculos para a fenda dupla seguem da mesma maneira, só mudando, no nosso caso, o valor de $a$, que aqui para a fenda dupla usamos $d$ que é o espaço entre os centros das fendas, e o valor de $y$ que medimos. A distancia $D$ da fenda até a parede (ponto de leitura) foi de $8,94m \pm 1cm$, e o percurso todo de leitura $2y$ foi de $45.23cm \pm 1cm$. Nossa fenda dupla possui duas aberturas de $0,05mm \pm 0,04mm$ e o espaços entre os seus centros é de $0,13mm \pm 0,04mm$.
+
+\begin{align*}\label{calc_dupla}
+\lambda & \approx \frac{yd}{mD}\\
+&\approx \frac{0,226\cdot 0,00013}{6 \cdot 8,94}\\
+&\approx 547.7255779\cdot 10^{-9}\\
+&\approx 547.7255779\cdot 10^{-9} \pm 200.0843009\cdot 10^{-9}
+\end{align*}
+
+Sem considerar o erro, o resultado está mais uma vez dentro do intervalo que corresponde a cor verde $\lambda ~500-565 nm$
