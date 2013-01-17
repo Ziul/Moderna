@@ -1,13 +1,13 @@
 \section{Introdução}\label{intro}
-Esse relatório descreve a reprodução do experimento de Thomas Young proposta para a disciplina de Física Moderna da Faculdade UnB-Gama. Visa assim mostrar propriedades de onda que a luz possui, e colher dados experimentais para análise, sendo realizado da seguinte forma: Confecção de fendas para difração, confecção do circuito que possibilita utilizar um sensor (LDR), leitura do sensor para um microcontrolador e em seguida leitura e tratamento dos dados na porta serial do computador.
+Esse relatório descreve a reprodução do experimento de Thomas Young proposta para a disciplina de Física Moderna da Faculdade UnB-Gama. Visa assim mostrar propriedades de onda que a luz possui, e colher dados experimentais para análise, sendo realizado da seguinte forma: Confecção de fendas para difração, confecção do circuito que possibilita utilizar um sensor (LDR), leitura do sensor para um microcontrolador e em seguida leitura e tratamento dos dados na porta serial do computador\cite{feynman}.
 
 Se a luz consistisse estritamente de  partículas  normais ou clássicas, e estas partículas fossem disparadas em linha reta através de uma fenda e deixa-se chegar a uma superfície, do outro lado, seria de esperar um padrão correspondente ao tamanho e à forma da fenda. No entanto, quando esta "experiência de única fenda" é efectivamente realizado, o padrão na superfície (parede) é um padrão de difração em que a luz se espalha. Quanto menor a fenda, maior o angulo de dissipação.
 
-Da mesma forma, se a luz consistisse de partículas estritamente clássicas e iluminado duas fendas paralelas, o padrão esperado na superfície seria simplesmente a soma das duas fendas de um único padrão. Na realidade, porém, o padrão muda para uma série de faixas claras e escuras. Quando Thomas Young demonstrou pela primeira vez este fenômeno, indicou que a luz consiste de ondas, já que a distribuição de brilho pode ser explicada pela interferencia construtiva e interferência destrutiva de frentes de onda. A experiência de Young, realizada no início de 1800, desempenhou um papel vital na aceitação da teoria ondulatória da luz, vencendo a teoria corpuscular da luz, proposta por Isaac Newton, que tinha sido o modelo aceito de propagação da luz nos séculos 17 e 18. No entanto, a descoberta posterior do efeito fotoeléctrico demonstrou que, em função das circunstâncias, a luz pode comportar-se como se ela fosse composta de partículas discretas. Estas descobertas aparentemente contraditórias tornou necessário ir além da física clássica e tomar a natureza quântica da luz em conta.
+Da mesma forma, se a luz consistisse de partículas estritamente clássicas e iluminado duas fendas paralelas, o padrão esperado na superfície seria simplesmente a soma das duas fendas de um único padrão. Na realidade, porém, o padrão muda para uma série de faixas claras e escuras. Quando Thomas Young demonstrou pela primeira vez este fenômeno, indicou que a luz consiste de ondas, já que a distribuição de brilho pode ser explicada pela interferência construtiva e interferência destrutiva de frentes de onda. A experiência de Young, realizada no início de 1800, desempenhou um papel vital na aceitação da teoria ondulatória da luz, vencendo a teoria corpuscular da luz, proposta por Isaac Newton, que tinha sido o modelo aceito de propagação da luz nos séculos 17 e 18. No entanto, a descoberta posterior do efeito fotoelétrico demonstrou que, em função das circunstâncias, a luz pode comportar-se como se ela fosse composta de partículas discretas. Estas descobertas aparentemente contraditórias tornou necessário ir além da física clássica e tomar a natureza quântica da luz em conta.
 
 \subsection{Dualidade}\label{dualidade}
 
-A teoria quântica nos diz que tanto a luz quanto a matéria consistem de pequenas partículas que apresentam propriedades semelhantes à das ondas. A luz é composta de partículas chamadas de fótons e a matéria é composta de partículas chamadas de elétrons, prótons, nêutrons. É só quando a massa de uma partícula fica pequena o suficiente que suas propriedades ondulatórias aparecem.
+A teoria quântica nos diz que tanto a luz quanto a matéria consistem de pequenas partículas que apresentam propriedades semelhantes à das ondas. A luz é composta de partículas chamadas de fótons e a matéria é composta de partículas chamadas de elétrons, prótons, nêutrons. É só quando a massa de uma partícula fica pequena o suficiente que suas propriedades ondulatórias aparecem\cite{feynman}.
 
 Com o experimento feito por Thomas Young percebemos propriedades de onda na luz, sendo essas a difração e interferência:
 
@@ -77,7 +77,7 @@ Mesmo que a luz seja composta de partículas chamadas fotons, pode-se facilmente
 
 Sendo $C$ a velocidade da luz, $\lambda$ o seu comprimento de onda, e $f$ a frequência.
 
-Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de que a luz é realmente composta de partículas vem da experiência do efeito fotoelétrico.
+Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de que a luz é realmente composta de partículas vem da experiência do efeito fotoelétrico\cite{feynman}.
 
 \begin{figure}[H]
 \begin{center}
@@ -189,9 +189,9 @@ Pode parecer bastante óbvio que a luz se comporta como uma onda, mas a prova de
 \label{fotoeletrico}
 \end{figure}
 
-Uma característica importante deste trabalho é que o eletron é emitido a partir do metal com uma energia cinética específica (isto é, uma velocidade específica). Agora qualquer um que esteja familiarizado com o comportamento das ondas sabe que a energia associada com uma onda está relacionada com a sua amplitude ou intensidade. Assim, todos os que pensavam que a luz é apenas uma onda estavam realmente confusos quando a intensidade da luz foi aumentada (luz brilhante) e a energia cinética do elétron emitido não mudou. O que acontece é que, ao aumentar o brilho da luz mais elétrons são emitidos, mas todos têm a mesma energia cinética.
+Uma característica importante deste trabalho é que o elétron é emitido a partir do metal com uma energia cinética específica (isto é, uma velocidade específica). Agora qualquer um que esteja familiarizado com o comportamento das ondas sabe que a energia associada com uma onda está relacionada com a sua amplitude ou intensidade. Assim, todos os que pensavam que a luz é apenas uma onda estavam realmente confusos quando a intensidade da luz foi aumentada (luz brilhante) e a energia cinética do elétron emitido não mudou. O que acontece é que, ao aumentar o brilho da luz mais elétrons são emitidos, mas todos têm a mesma energia cinética.
 
-A energia cinética do elétron emitido tem que depender de alguma coisa. Foi descoberto então que variar a frequência da luz modifica a energia cinética do eletron emitido.
+A energia cinética do elétron emitido tem que depender de alguma coisa. Foi descoberto então que variar a frequência da luz modifica a energia cinética do elétron emitido\cite{greene}.
 
 %\pgfplotsset{width=8cm,compat=newest}
 %
@@ -239,7 +239,7 @@ A energia cinética do elétron emitido tem que depender de alguma coisa. Foi de
 \label{kinect_freq}
 \end{figure}
 
-No entanto, existe uma frequência crítica para cada metal, $f_0$, abaixo da qual não são emitidos eletrons. Isto mostra que a energia cinética é igual à frequência luz multiplicada por uma constante (isto é, o declive da linha) Essa constante é chamada constante de Plank e é dada pelo símbolo h.
+No entanto, existe uma frequência crítica para cada metal, $f_0$, abaixo da qual não são emitidos elétrons. Isto mostra que a energia cinética é igual à frequência luz multiplicada por uma constante (isto é, o declive da linha) Essa constante é chamada constante de Plank e é dada pelo símbolo h.
 
 \begin{equation}\label{const_plank}
 	h= 6.63\cdot 10^-34 J\cdot s 
@@ -251,7 +251,7 @@ Assim é possível escrever uma equação para a energia cinética do eletron em
 	E_c= h\cdot f - h\cdot f_0
 \end{equation}
 
-Este resultado não é consistente com a teoria da luz como uma onda. Uma explicação que é consistente com essa imagem é que a luz vem em pacotes discretos, chamados fótons, e cada fóton deve ter energia suficiente para ejetar um único elétron. Caso contrário, nada acontece. Assim, a energia de um único foton é:
+Este resultado não é consistente com a teoria da luz como uma onda. Uma explicação que é consistente com essa imagem é que a luz vem em pacotes discretos, chamados fótons, e cada fóton deve ter energia suficiente para ejetar um único elétron. Caso contrário, nada acontece. Assim, a energia de um único fóton é:
 
 \begin{equation}
 	E_f=hf
