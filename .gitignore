@@ -1,0 +1,11 @@
+
+# /relatorio/
+/relatorio/*.lof
+/relatorio/*.log
+/relatorio/*.lol
+/relatorio/*.aux
+/relatorio/*.lot
+/relatorio/*.out
+/relatorio/*.synctex.gz
+/relatorio/*.tmp
+/relatorio/*.toc
